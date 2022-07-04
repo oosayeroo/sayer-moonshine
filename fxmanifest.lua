@@ -4,7 +4,7 @@ game 'gta5'
 
 author 'oosayeroo'
 
-description 'qb-moonshine'
+description 'qb-moonshine A simple script to create moonshine'
 
 version '1.1.0'
 
