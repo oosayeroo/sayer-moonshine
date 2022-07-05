@@ -1,4 +1,7 @@
 local QBCore = exports['qb-core']:GetCoreObject()
+local SellMoonshine = {
+    ["m-moonshine"]  =  Config.MoonshineValue ,
+}
 
 RegisterNetEvent('qb-moonshine:server:GetJars', function()
     local src = source
@@ -140,4 +143,30 @@ RegisterNetEvent('qb-moonshine:server:FinishMoonshine', function()
         Player.Functions.AddItem('m-moonshine', Config.BatchAmount)
         TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['m-moonshine'], "add")
     end
+end)
+
+--Selling ---
+RegisterNetEvent('qb-moonshine:server:SellMoonshine', function()
+    local src = source
+    local price = 0
+    local Player = QBCore.Functions.GetPlayer(src)
+    
+    local xItem = Player.Functions.GetItemsByName(SellMoonshine)
+    if xItem ~= nil then
+        for k, v in pairs(Player.PlayerData.items) do
+            if Player.PlayerData.items[k] ~= nil then
+                if SellMoonshine[Player.PlayerData.items[k].name] ~= nil then
+                    price = price + (SellMoonshine[Player.PlayerData.items[k].name] * Player.PlayerData.items[k].amount)
+                    Player.Functions.RemoveItem(Player.PlayerData.items[k].name, Player.PlayerData.items[k].amount, k)
+
+        Player.Functions.AddMoney("cash", price, "sold-moonshine")
+            TriggerClientEvent('QBCore:Notify', src, "You sold your Moonshine for $"..price)
+            TriggerEvent("qb-log:server:CreateLog", "sellmoonshine", "moonshine", "blue", "**"..GetPlayerName(src) .. "** got $"..price.." for selling the Moonshine")
+                end
+            end
+        end
+    else
+        TriggerClientEvent('QBCore:Notify', src, "You have no Moonshine..")
+    end
+
 end)

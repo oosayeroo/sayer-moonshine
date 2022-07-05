@@ -1,5 +1,7 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 local potatopicking = false
+local Selllocation = Config.SellItemLocation 
+local sl = Selllocation 
 
 DrawText3Ds = function(x, y, z, text)
 	SetTextScale(0.35, 0.35)
@@ -463,3 +465,32 @@ function potatoMashing()
         QBCore.Functions.Notify("Mashing Canceled", "error")
     end)
 end
+
+--Selling---
+
+CreateThread(function()
+    while true do
+        local InRange = false
+        local PlayerPed = PlayerPedId()
+        local PlayerPos = GetEntityCoords(PlayerPed)
+
+            local dist = #(PlayerPos - vector3(sl.x, sl.y, sl.z)) 
+            if dist < 10 then
+                InRange = true
+                DrawMarker(2,sl.x, sl.y, sl.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.25, 0.2, 0.1, 255, 0, 0, 155, 0, 0, 0, 1, 0, 0, 0)
+                if dist < 1 then
+
+                    DrawText3Ds(sl.x, sl.y, sl.z, '~g~E~w~ - Sell Moonshine') 
+                    if IsControlJustPressed(0, 38) then
+                        TriggerServerEvent('qb-moonshine:server:SellMoonshine')
+                    end
+                end
+            end
+
+        if not InRange then
+            Wait(5000)
+        end
+        Wait(5)
+    end
+end)
+

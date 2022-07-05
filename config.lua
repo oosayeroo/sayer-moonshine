@@ -46,3 +46,6 @@ Config.MashAmount = math.random(1, 3)  --amount of mash to get from 1 potato
 Config.YeastCost = math.random(20, 50)  -- cost of purchasing yeast
 Config.BatchAmount = math.random(3, 8)     --how many moonshine you end up with by end of all stages
 
+--selling--
+Config.SellItemLocation = vector3(1538.85, 6322.41, 24.61)  --location to sell moonshine
+Config.MoonshineValue = 100  --how much 1 moonshine sells for at sell location
