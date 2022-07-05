@@ -1,6 +1,8 @@
 # qb-moonshine
 a simple moonshine making script with configurable locations, prices, amounts etc. 
 
+Discord - https://discord.gg/3WYz3zaqG5
+
 # Dependencies:
 - qb-core - https://github.com/qbcore-framework/qb-core
 - qb-target - https://github.com/qbcore-framework/qb-target
