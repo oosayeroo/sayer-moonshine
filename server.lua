@@ -134,20 +134,3 @@ RegisterNetEvent('qb-moonshine:server:FinishMoonshine', function()
         TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['m-moonshine'], "add")
     end
 end)
-
---[[RegisterNetEvent('qb-moonshine:server:VenderFrangos', function()
-    local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
-    local rooster_frango_carne = Player.Functions.GetItemByName('rooster_frango_carne')
-    local price = Config.ChickenSellPrice
-
-    if rooster_frango_carne ~= nil then
-
-        Player.Functions.RemoveItem('rooster_frango_carne', 1)
-        TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['rooster_frango_carne'], "remove")
-
-        Player.Functions.AddMoney('cash', price)
-    else
-        TriggerClientEvent('QBCore:Notify', src, 'You do not have any meat to sell', 'error')
-    end
-end) ]]
