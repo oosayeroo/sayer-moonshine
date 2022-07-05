@@ -1,8 +1,6 @@
 # qb-moonshine
 a simple moonshine making script with configurable locations, prices, amounts etc. 
 
-Discord - https://discord.gg/3WYz3zaqG5
-
 # Dependencies:
 - qb-core - https://github.com/qbcore-framework/qb-core
 - qb-target - https://github.com/qbcore-framework/qb-target
@@ -22,10 +20,11 @@ Add to qb-core/shared/items.lua:
 	['m-yeast'] 	             	 = {['name'] = 'm-yeast', 	                	['label'] = 'Yeast', 	         	['weight'] = 100, 		['type'] = 'item', 		['image'] = 'm-yeast.png', 	            	['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Yeast For Mixing Things'},
 	['m-barley'] 	              	 = {['name'] = 'm-barley', 	                	['label'] = 'Barley', 	         	['weight'] = 100, 		['type'] = 'item', 		['image'] = 'm-barley.png', 	          	['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Barley For Mixing Things'},
 	['m-mash'] 	                 	 = {['name'] = 'm-mash', 	                	['label'] = 'Mash', 	         	['weight'] = 100, 		['type'] = 'item', 		['image'] = 'm-mash.png', 	            	['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Mashed Potato, Good For Mixing'},
+	['m-potato'] 	               	 = {['name'] = 'm-potato', 	                	['label'] = 'Potato', 	         	['weight'] = 100, 		['type'] = 'item', 		['image'] = 'm-potato.png', 	           	['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Good For Mashing'},
 
 ```
 
-Add Images From qb-moonshine/images to qb-inventory/html/images
+Add Images From qb-moonshine/images to qb-inventory/html/images  
 
 ## Add To Small Resources/Server/Consumable
 ```

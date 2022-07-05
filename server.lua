@@ -12,18 +12,6 @@ RegisterNetEvent('qb-moonshine:server:GetJars', function()
     TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "add")
 end)
 
-RegisterNetEvent('qb-moonshine:server:GetBarley', function()
-    local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
-    local quantity = Config.BarleyAmount
-    local item = 'm-barley'
-    local price = Config.BarleyCost
-
-    Player.Functions.RemoveMoney('cash', price)
-    Player.Functions.AddItem(item, quantity)
-    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "add")
-end)
-
 RegisterNetEvent('qb-moonshine:server:GetYeast', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
@@ -36,14 +24,33 @@ RegisterNetEvent('qb-moonshine:server:GetYeast', function()
     TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "add")
 end)
 
+RegisterServerEvent('qb-moonshine:server:GetPotato')
+AddEventHandler('qb-moonshine:server:GetPotato', function()
+    local Player = QBCore.Functions.GetPlayer(source)
+    Player.Functions.AddItem("m-potato", Config.PotatoHarvestAmount)
+    TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['m-potato'], "add")
+end)
+
+RegisterServerEvent('qb-moonshine:server:GetBarley')
+AddEventHandler('qb-moonshine:server:GetBarley', function()
+    local Player = QBCore.Functions.GetPlayer(source)
+    Player.Functions.AddItem("m-barley", Config.BarleyHarvestAmount)
+    TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['m-barley'], "add")
+end)
+
+QBCore.Functions.CreateUseableItem("m-potato", function(source, item)
+    local Player = QBCore.Functions.GetPlayer(source)
+    TriggerClientEvent("qb-moonshine:client:GetMash", source, item.name)
+end)
+
 RegisterNetEvent('qb-moonshine:server:GetMash', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local quantity = Config.MashAmount
     local item = 'm-mash'
-    local price = Config.MashCost
+    local amount = 1
 
-    Player.Functions.RemoveMoney('cash', price)
+    Player.Functions.RemoveItem('m-potato', amount)
     Player.Functions.AddItem(item, quantity)
     TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "add")
 end)

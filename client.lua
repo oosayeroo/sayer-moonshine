@@ -1,4 +1,20 @@
 local QBCore = exports['qb-core']:GetCoreObject()
+local potatopicking = false
+
+DrawText3Ds = function(x, y, z, text)
+	SetTextScale(0.35, 0.35)
+    SetTextFont(4)
+    SetTextProportional(1)
+    SetTextColour(255, 255, 255, 215)
+    SetTextEntry("STRING")
+    SetTextCentre(true)
+    AddTextComponentString(text)
+    SetDrawOrigin(x,y,z, 0)
+    DrawText(0.0, 0.0)
+    local factor = (string.len(text)) / 370
+    DrawRect(0.0, 0.0+0.0125, 0.017+ factor, 0.03, 0, 0, 0, 75)
+    ClearDrawOrigin()
+end
 
 RegisterNetEvent('qb-moonshine:client:GetJars', function()
     QBCore.Functions.Progressbar('name_here', 'Grabbing some jars...', 5000, false, true, {
@@ -13,23 +29,6 @@ RegisterNetEvent('qb-moonshine:client:GetJars', function()
     }, {}, {}, function()
         TriggerServerEvent('qb-moonshine:server:GetJars')
         QBCore.Functions.Notify('You Bought some jars', 'primary', 7500)
-        ClearPedTasks(PlayerPedId())
-    end)
-end)
-
-RegisterNetEvent('qb-moonshine:client:GetBarley', function()
-    QBCore.Functions.Progressbar('name_here', 'Purchasing Barley...', 5000, false, true, {
-        disableMovement = true,
-        disableCarMovement = true,
-        disableMouse = false,
-        disableCombat = true,
-    }, {
-        animDict = 'anim@gangops@facility@servers@',
-        anim = 'idle',
-        flags = 16,
-    }, {}, {}, function()
-        TriggerServerEvent('qb-moonshine:server:GetBarley')
-        QBCore.Functions.Notify('You Bought some Barley', 'primary', 7500)
         ClearPedTasks(PlayerPedId())
     end)
 end)
@@ -52,7 +51,7 @@ RegisterNetEvent('qb-moonshine:client:GetYeast', function()
 end)
 
 RegisterNetEvent('qb-moonshine:client:GetMash', function()
-    QBCore.Functions.Progressbar('name_here', 'Purchasing Mash...', 5000, false, true, {
+    QBCore.Functions.Progressbar('name_here', 'Making Mash...', 0, false, true, {
         disableMovement = true,
         disableCarMovement = true,
         disableMouse = false,
@@ -62,17 +61,41 @@ RegisterNetEvent('qb-moonshine:client:GetMash', function()
         anim = 'idle',
         flags = 16,
     }, {}, {}, function()
-        TriggerServerEvent('qb-moonshine:server:GetMash')
-        QBCore.Functions.Notify('You Bought some Mash', 'primary', 7500)
+        potatoMashing()
+        QBCore.Functions.Notify('You Made some Mash', 'primary', 7500)
         ClearPedTasks(PlayerPedId())
     end)
+end)
+
+RegisterNetEvent('qb-moonshine:client:AddYeast', function()
+    QBCore.Functions.TriggerCallback('QBCore:HasItem', function(HasItem)
+        if HasItem then
+
+            QBCore.Functions.Progressbar('name_here', 'Adding Yeast...', 10000, false, true, {
+                disableMovement = true,
+                disableCarMovement = true,
+                disableMouse = false,
+                disableCombat = true,
+            }, {
+                animDict = 'mini@repair',
+                anim = 'fixing_a_ped',
+                flags = 16,
+            }, {}, {}, function()
+                TriggerServerEvent('qb-moonshine:server:AddYeast')
+                QBCore.Functions.Notify('You Added some yeast', 'primary', 7500)
+                ClearPedTasks(PlayerPedId())
+            end)
+        else
+            QBCore.Functions.Notify('You missed a step in the process', 'error', 7500)
+        end
+    end, 'm-heatedbarley')
 end)
 
 RegisterNetEvent('qb-moonshine:client:HeatWater', function()
     QBCore.Functions.TriggerCallback('QBCore:HasItem', function(HasItem)
         if HasItem then
 
-            QBCore.Functions.Progressbar('name_here', 'Heating Water...', 5000, false, true, {
+            QBCore.Functions.Progressbar('name_here', 'Heating Water...', 8000, false, true, {
                 disableMovement = true,
                 disableCarMovement = true,
                 disableMouse = false,
@@ -96,7 +119,7 @@ RegisterNetEvent('qb-moonshine:client:AddBarley', function()
     QBCore.Functions.TriggerCallback('QBCore:HasItem', function(HasItem)
         if HasItem then
 
-            QBCore.Functions.Progressbar('name_here', 'Adding Barley...', 5000, false, true, {
+            QBCore.Functions.Progressbar('name_here', 'Adding Barley...', 10000, false, true, {
                 disableMovement = true,
                 disableCarMovement = true,
                 disableMouse = false,
@@ -120,7 +143,7 @@ RegisterNetEvent('qb-moonshine:client:AddYeast', function()
     QBCore.Functions.TriggerCallback('QBCore:HasItem', function(HasItem)
         if HasItem then
 
-            QBCore.Functions.Progressbar('name_here', 'Adding Yeast...', 5000, false, true, {
+            QBCore.Functions.Progressbar('name_here', 'Adding Yeast...', 10000, false, true, {
                 disableMovement = true,
                 disableCarMovement = true,
                 disableMouse = false,
@@ -144,7 +167,7 @@ RegisterNetEvent('qb-moonshine:client:AddMash', function()
     QBCore.Functions.TriggerCallback('QBCore:HasItem', function(HasItem)
         if HasItem then
 
-            QBCore.Functions.Progressbar('name_here', 'Adding Mash...', 5000, false, true, {
+            QBCore.Functions.Progressbar('name_here', 'Adding Mash...', 10000, false, true, {
                 disableMovement = true,
                 disableCarMovement = true,
                 disableMouse = false,
@@ -168,7 +191,7 @@ RegisterNetEvent('qb-moonshine:client:FinishMoonshine', function()
     QBCore.Functions.TriggerCallback('QBCore:HasItem', function(HasItem)
         if HasItem then
 
-            QBCore.Functions.Progressbar('name_here', 'Finishing Up...', 5000, false, true, {
+            QBCore.Functions.Progressbar('name_here', 'Finishing Up...', 10000, false, true, {
                 disableMovement = true,
                 disableCarMovement = true,
                 disableMouse = false,
@@ -202,14 +225,6 @@ RegisterNetEvent('qb-menu:client:BuyMoonshineIngredients', function(data)
             params = {
                 event = "qb-moonshine:client:GetJars"
             }
-        },
-        {
-            
-            header = "• Barley",
-            txt = "Buy Some Barley",
-            params = {
-                event = "qb-moonshine:client:GetBarley"
-            }
         },  
         {
             
@@ -217,14 +232,6 @@ RegisterNetEvent('qb-menu:client:BuyMoonshineIngredients', function(data)
             txt = "Buy Some Yeast",
             params = {
                 event = "qb-moonshine:client:GetYeast"
-            }
-        },
-        {
-            
-            header = "• Mashed Potato",
-            txt = "Buy some mash",
-            params = {
-                event = "qb-moonshine:client:GetMash"
             }
         },
         {
@@ -252,6 +259,62 @@ CreateThread(function()
                 elseif #(pos - vector3(v.x, v.y, v.z)) < 1.5 then
                     sleep = 0
                     QBCore.Functions.DrawText3D(v.x, v.y, v.z, "Buy Ingredients")
+                end
+            end
+
+            for k, v in pairs(Config.MoonshineLocations["pick-potato1"]) do
+                if #(pos - vector3(v.x, v.y, v.z)) < 20 then
+                    sleep = 0
+                    QBCore.Functions.DrawText3D(v.x, v.y, v.z, "~g~[E]~w~ - Pick Potato")
+                    if IsControlJustReleased(0, 38) then
+                        PrepareAnim()
+                        pickPotato()
+                    end
+                elseif #(pos - vector3(v.x, v.y, v.z)) < 1.5 then
+                    sleep = 0
+                    QBCore.Functions.DrawText3D(v.x, v.y, v.z, "Pick Potato")
+                end
+            end
+
+            for k, v in pairs(Config.MoonshineLocations["pick-potato2"]) do
+                if #(pos - vector3(v.x, v.y, v.z)) < 20 then
+                    sleep = 0
+                    QBCore.Functions.DrawText3D(v.x, v.y, v.z, "~g~[E]~w~ - Pick Potato")
+                    if IsControlJustReleased(0, 38) then
+                        PrepareAnim()
+                        pickPotato()
+                    end
+                elseif #(pos - vector3(v.x, v.y, v.z)) < 1.5 then
+                    sleep = 0
+                    QBCore.Functions.DrawText3D(v.x, v.y, v.z, "Pick Potato")
+                end
+            end
+
+            for k, v in pairs(Config.MoonshineLocations["pick-barley1"]) do
+                if #(pos - vector3(v.x, v.y, v.z)) < 20 then
+                    sleep = 0
+                    QBCore.Functions.DrawText3D(v.x, v.y, v.z, "~g~[E]~w~ - Pick Barley")
+                    if IsControlJustReleased(0, 38) then
+                        PrepareAnim()
+                        pickBarley()
+                    end
+                elseif #(pos - vector3(v.x, v.y, v.z)) < 1.5 then
+                    sleep = 0
+                    QBCore.Functions.DrawText3D(v.x, v.y, v.z, "Pick Barley")
+                end
+            end
+
+            for k, v in pairs(Config.MoonshineLocations["pick-barley2"]) do
+                if #(pos - vector3(v.x, v.y, v.z)) < 20 then
+                    sleep = 0
+                    QBCore.Functions.DrawText3D(v.x, v.y, v.z, "~g~[E]~w~ - Pick Barley")
+                    if IsControlJustReleased(0, 38) then
+                        PrepareAnim()
+                        pickBarley()
+                    end
+                elseif #(pos - vector3(v.x, v.y, v.z)) < 1.5 then
+                    sleep = 0
+                    QBCore.Functions.DrawText3D(v.x, v.y, v.z, "Pick Barley")
                 end
             end
             
@@ -324,3 +387,79 @@ CreateThread(function()
     end
     end
   end)
+
+  function PrepareAnim()
+    local ped = PlayerPedId()
+    TaskStartScenarioInPlace(ped, "WORLD_HUMAN_GARDENER_PLANT", 0, true)
+    PreparingAnimCheck()
+  end
+
+function PreparingAnimCheck()
+    potatopicking = true
+    Citizen.CreateThread(function()
+        while true do
+            local ped = PlayerPedId()
+
+            if potatopicking then
+
+            else
+                ClearPedTasksImmediately(ped)
+                break
+            end
+
+            Citizen.Wait(200)
+        end
+    end)
+end
+
+
+  function pickPotato()
+    QBCore.Functions.Progressbar("grind_coke", "Picking Potatos ..", math.random(5000,6000), false, true, {
+        disableMovement = true,
+        disableCarMovement = true,
+        disableMouse = false,
+        disableCombat = true,
+    }, {}, {}, {}, function() -- Done
+        TriggerServerEvent("qb-moonshine:server:GetPotato")
+        ClearPedTasks(PlayerPedId())
+        potatopicking = false
+    end, function() -- Cancel
+        openingDoor = false
+        ClearPedTasks(PlayerPedId())
+        QBCore.Functions.Notify("Picking Canceled", "error")
+    end)
+end
+
+function pickBarley()
+    QBCore.Functions.Progressbar("grind_coke", "Picking Barley ..", math.random(5000,6000), false, true, {
+        disableMovement = true,
+        disableCarMovement = true,
+        disableMouse = false,
+        disableCombat = true,
+    }, {}, {}, {}, function() -- Done
+        TriggerServerEvent("qb-moonshine:server:GetBarley")
+        ClearPedTasks(PlayerPedId())
+        potatopicking = false
+    end, function() -- Cancel
+        openingDoor = false
+        ClearPedTasks(PlayerPedId())
+        QBCore.Functions.Notify("Picking Canceled", "error")
+    end)
+end
+
+function potatoMashing()
+    QBCore.Functions.Progressbar("grind_coke", "Mashing Potato ..", math.random(5000, 6000), false, true, {
+        disableMovement = true,
+        disableCarMovement = true,
+        disableMouse = false,
+        disableCombat = true,
+    }, {}, {}, {}, function() -- Done
+        TriggerServerEvent("qb-moonshine:server:GetMash")
+        ClearPedTasks(PlayerPedId())
+        potatopicking = false
+    end, function() -- Cancel
+        openingDoor = false
+        ClearPedTasks(PlayerPedId())
+        QBCore.Functions.Notify("Mashing Canceled", "error")
+    end)
+end
