@@ -1,3 +1,5 @@
+https://discord.gg/3WYz3zaqG5
+
 # qb-moonshine
 a simple moonshine making script with configurable locations, prices, amounts etc. 
 
