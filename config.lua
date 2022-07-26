@@ -35,16 +35,37 @@ Config.MoonshineLocations = {
 }
 
 --harvest--
-Config.PotatoHarvestAmount = math.random(1, 4)  --amount of potato to harvest each time
-Config.BarleyHarvestAmount = math.random(1, 4)  -- amont of barley to harvest each time
+--POTATO--
+Config.MinPotatoHarvestAmount = 2  --amount of potato to harvest each time
+Config.MaxPotatoHarvestAmount = 4
+
+--BARLEY--
+Config.BarleyHarvestAmount = 2  -- amont of barley to harvest each time
+Config.MaxBarleyHarvestAmount = 4
 
 --shop--
-Config.IngredientCost = math.random(100, 150)    --how much it costs for the jars
-Config.JarAmount = math.random(10, 20)  --how many jars you purchase for price above
-Config.YeastAmount = math.random(10, 20)  --amount of yeast to buy in one purchase
-Config.MashAmount = math.random(1, 3)  --amount of mash to get from 1 potato
-Config.YeastCost = math.random(20, 50)  -- cost of purchasing yeast
-Config.BatchAmount = math.random(3, 8)     --how many moonshine you end up with by end of all stages
+Config.MinIngredientCost = 100  --how much it costs for the jars MINIMUM
+Config.MaxIngredientCost = 150  --how much it cost for the jars MAXIMUM
+
+--JAR--
+Config.MinJarAmount = 10  --how many jars you purchase for price above MINIMUM
+Config.MaxJarAmount = 20  --how many jars you purchase for price above MAXIMUM
+
+--MASH--
+Config.MinMashAmount = 1  --amount of mash to get from 1 potato
+Config.MaxMashAmount = 3
+
+--YEAST--
+Config.MinYeastCost = 20  -- cost of purchasing yeast
+Config.MaxYeastCost = 50
+
+--YEAST PRICE--
+Config.MinYeastAmount = 10 --amount of yeast to buy in one purchase
+Config.MaxYeastAmount 20
+
+--PRODUCT--
+Config.MinBatchAmount = 3    --how much moonshine you end up with by end of all stages
+Config.MaxBatchAmount = 10
 
 --selling--
 Config.SellItemLocation = vector3(1538.85, 6322.41, 24.61)  --location to sell moonshine
