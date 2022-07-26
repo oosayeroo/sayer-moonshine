@@ -6,9 +6,9 @@ local SellMoonshine = {
 RegisterNetEvent('qb-moonshine:server:GetJars', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
-    local quantity = Config.JarAmount
+    local quantity = math.random(Config.MinJarAmount, Config.MaxJarAmount)
     local item = 'm-waterjar'
-    local price = Config.IngredientCost
+    local price = math.random(Config.MinIngredientCost, Config.MaxIngredientCost)
 
     Player.Functions.RemoveMoney('cash', price)
     Player.Functions.AddItem(item, quantity)
@@ -18,9 +18,9 @@ end)
 RegisterNetEvent('qb-moonshine:server:GetYeast', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
-    local quantity = Config.YeastAmount
+    local quantity = math.random(Config.MinYeastAmount, Config.MaxYeastAmount)
     local item = 'm-yeast'
-    local price = Config.YeastCost
+    local price = math.random(Config.MinYeastCost, Config.MaxYeastCost)
 
     Player.Functions.RemoveMoney('cash', price)
     Player.Functions.AddItem(item, quantity)
@@ -30,14 +30,14 @@ end)
 RegisterServerEvent('qb-moonshine:server:GetPotato')
 AddEventHandler('qb-moonshine:server:GetPotato', function()
     local Player = QBCore.Functions.GetPlayer(source)
-    Player.Functions.AddItem("m-potato", Config.PotatoHarvestAmount)
+    Player.Functions.AddItem("m-potato", math.random(Config.MinPotatoHarvestAmount, Config.MaxPotatoHarvestAmount))
     TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['m-potato'], "add")
 end)
 
 RegisterServerEvent('qb-moonshine:server:GetBarley')
 AddEventHandler('qb-moonshine:server:GetBarley', function()
     local Player = QBCore.Functions.GetPlayer(source)
-    Player.Functions.AddItem("m-barley", Config.BarleyHarvestAmount)
+    Player.Functions.AddItem("m-barley", math.random(Config.MinBarleyHarvestAmount, Config.MaxBarleyHarvestAmount))
     TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['m-barley'], "add")
 end)
 
@@ -49,7 +49,7 @@ end)
 RegisterNetEvent('qb-moonshine:server:GetMash', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
-    local quantity = Config.MashAmount
+    local quantity = math.random(Config.MinMashAmount, Config.MaxMashAmount)
     local item = 'm-mash'
     local amount = 1
 
@@ -140,7 +140,7 @@ RegisterNetEvent('qb-moonshine:server:FinishMoonshine', function()
         Player.Functions.RemoveItem('m-moonshinemix', 1)
         TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['m-moonshinemix'], "remove")
 
-        Player.Functions.AddItem('m-moonshine', Config.BatchAmount)
+        Player.Functions.AddItem('m-moonshine', math.random(Config.MinBatchAmount, Config.MaxBatchAmount))
         TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['m-moonshine'], "add")
     end
 end)
