@@ -61,7 +61,7 @@ Config.MaxYeastCost = 50
 
 --YEAST PRICE--
 Config.MinYeastAmount = 10 --amount of yeast to buy in one purchase
-Config.MaxYeastAmount 20
+Config.MaxYeastAmount = 20
 
 --PRODUCT--
 Config.MinBatchAmount = 3    --how much moonshine you end up with by end of all stages
