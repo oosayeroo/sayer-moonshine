@@ -40,7 +40,7 @@ Config.MinPotatoHarvestAmount = 2  --amount of potato to harvest each time
 Config.MaxPotatoHarvestAmount = 4
 
 --BARLEY--
-Config.BarleyHarvestAmount = 2  -- amont of barley to harvest each time
+Config.MinBarleyHarvestAmount = 2  -- amont of barley to harvest each time
 Config.MaxBarleyHarvestAmount = 4
 
 --shop--
