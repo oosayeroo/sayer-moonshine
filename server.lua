@@ -170,3 +170,4 @@ RegisterNetEvent('qb-moonshine:server:SellMoonshine', function()
     end
 
 end)
+

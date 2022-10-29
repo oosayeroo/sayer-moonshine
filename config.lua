@@ -34,6 +34,10 @@ Config.MoonshineLocations = {
     },
 }
 
+--TIMINGS--
+Config.ActionTime = 10 --in seconds (10 = 10 seconds)
+Config.PickingTime = 10
+
 --harvest--
 Config.PotatoHarvestAmount = math.random(1, 4)  --amount of potato to harvest each time
 Config.BarleyHarvestAmount = math.random(1, 4)  -- amont of barley to harvest each time
@@ -49,3 +53,7 @@ Config.BatchAmount = math.random(3, 8)     --how many moonshine you end up with 
 --selling--
 Config.SellItemLocation = vector3(1538.85, 6322.41, 24.61)  --location to sell moonshine
 Config.MoonshineValue = 100  --how much 1 moonshine sells for at sell location
+
+--BREAK/FAIL SYSTEM--
+Config.EnableFailing = true --can fail a process
+Config.FailChance = 10 --in % chance that you fail a step.

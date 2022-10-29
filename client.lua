@@ -70,147 +70,165 @@ RegisterNetEvent('qb-moonshine:client:GetMash', function()
 end)
 
 RegisterNetEvent('qb-moonshine:client:AddYeast', function()
-    QBCore.Functions.TriggerCallback('QBCore:HasItem', function(HasItem)
-        if HasItem then
-
-            QBCore.Functions.Progressbar('name_here', 'Adding Yeast...', 10000, false, true, {
-                disableMovement = true,
-                disableCarMovement = true,
-                disableMouse = false,
-                disableCombat = true,
-            }, {
-                animDict = 'mini@repair',
-                anim = 'fixing_a_ped',
-                flags = 16,
-            }, {}, {}, function()
-                TriggerServerEvent('qb-moonshine:server:AddYeast')
-                QBCore.Functions.Notify('You Added some yeast', 'primary', 7500)
-                ClearPedTasks(PlayerPedId())
-            end)
-        else
-            QBCore.Functions.Notify('You missed a step in the process', 'error', 7500)
-        end
-    end, 'm-heatedbarley')
+    if QBCore.Functions.HasItem('m-heatebarley') then
+        QBCore.Functions.Progressbar('name_here', 'Adding Yeast...', Config.ActionTime * 60, false, true, {
+            disableMovement = true,
+            disableCarMovement = true,
+            disableMouse = false,
+            disableCombat = true,
+        }, {
+            animDict = 'mini@repair',
+            anim = 'fixing_a_ped',
+            flags = 16,
+        }, {}, {}, function()
+            if Config.EnableFailing then
+                local chance = math.random(0, 100)
+                if chance < Config.FailChance then
+                    QBCore.Functions.Notify('You Failed this step, Try Again', 'error')
+                end
+            else
+            TriggerServerEvent('qb-moonshine:server:AddYeast')
+            QBCore.Functions.Notify('You Added some yeast', 'primary', 7500)
+            ClearPedTasks(PlayerPedId())
+        end)
+    else
+        QBCore.Functions.Notify('You Forgot to Add Barley', 'error')
+    end
 end)
 
 RegisterNetEvent('qb-moonshine:client:HeatWater', function()
-    QBCore.Functions.TriggerCallback('QBCore:HasItem', function(HasItem)
-        if HasItem then
-
-            QBCore.Functions.Progressbar('name_here', 'Heating Water...', 8000, false, true, {
-                disableMovement = true,
-                disableCarMovement = true,
-                disableMouse = false,
-                disableCombat = true,
-            }, {
-                animDict = 'mini@repair',
-                anim = 'fixing_a_ped',
-                flags = 16,
-            }, {}, {}, function()
-                TriggerServerEvent('qb-moonshine:server:HeatWater')
-                QBCore.Functions.Notify('You Heated Some Water', 'primary', 7500)
-                ClearPedTasks(PlayerPedId())
-            end)
-        else
-            QBCore.Functions.Notify('You need a water jar to heat water', 'error', 7500)
-        end
-    end, 'm-waterjar')
+    if QBCore.Functions.HasItem('m-waterjar') then
+        QBCore.Functions.Progressbar('name_here', 'Heating Water...', Config.ActionTime * 60, false, true, {
+            disableMovement = true,
+            disableCarMovement = true,
+            disableMouse = false,
+            disableCombat = true,
+        }, {
+            animDict = 'mini@repair',
+            anim = 'fixing_a_ped',
+            flags = 16,
+        }, {}, {}, function()
+            if Config.EnableFailing then
+                local chance = math.random(0, 100)
+                if chance < Config.FailChance then
+                    QBCore.Functions.Notify('You Failed this step, Try Again', 'error')
+                end
+            else
+            TriggerServerEvent('qb-moonshine:server:HeatWater')
+            QBCore.Functions.Notify('You Heated Some Water', 'primary', 7500)
+            ClearPedTasks(PlayerPedId())
+        end)
+    else
+        QBCore.Functions.Notify('You Forgot to Add Water', 'error')
+    end
 end)
 
 RegisterNetEvent('qb-moonshine:client:AddBarley', function()
-    QBCore.Functions.TriggerCallback('QBCore:HasItem', function(HasItem)
-        if HasItem then
-
-            QBCore.Functions.Progressbar('name_here', 'Adding Barley...', 10000, false, true, {
-                disableMovement = true,
-                disableCarMovement = true,
-                disableMouse = false,
-                disableCombat = true,
-            }, {
-                animDict = 'mini@repair',
-                anim = 'fixing_a_ped',
-                flags = 16,
-            }, {}, {}, function()
-                TriggerServerEvent('qb-moonshine:server:AddBarley')
-                QBCore.Functions.Notify('You Added some Barley', 'primary', 7500)
-                ClearPedTasks(PlayerPedId())
-            end)
-        else
-            QBCore.Functions.Notify('You need some Heated Water to Start Moonshine', 'error', 7500)
-        end
-    end, 'm-heatedwater')
+    if QBCore.Functions.HasItem('m-heatedwater') then
+        QBCore.Functions.Progressbar('name_here', 'Adding Barley...', Config.ActionTime * 60, false, true, {
+            disableMovement = true,
+            disableCarMovement = true,
+            disableMouse = false,
+            disableCombat = true,
+        }, {
+            animDict = 'mini@repair',
+            anim = 'fixing_a_ped',
+            flags = 16,
+        }, {}, {}, function()
+            if Config.EnableFailing then
+                local chance = math.random(0, 100)
+                if chance < Config.FailChance then
+                    QBCore.Functions.Notify('You Failed this step, Try Again', 'error')
+                end
+            else
+            TriggerServerEvent('qb-moonshine:server:AddBarley')
+            QBCore.Functions.Notify('You Added some Barley', 'primary', 7500)
+            ClearPedTasks(PlayerPedId())
+        end)
+    else
+        QBCore.Functions.Notify('You Forgot to Heat The Water', 'error')
+    end
 end)
 
 RegisterNetEvent('qb-moonshine:client:AddYeast', function()
-    QBCore.Functions.TriggerCallback('QBCore:HasItem', function(HasItem)
-        if HasItem then
-
-            QBCore.Functions.Progressbar('name_here', 'Adding Yeast...', 10000, false, true, {
-                disableMovement = true,
-                disableCarMovement = true,
-                disableMouse = false,
-                disableCombat = true,
-            }, {
-                animDict = 'mini@repair',
-                anim = 'fixing_a_ped',
-                flags = 16,
-            }, {}, {}, function()
-                TriggerServerEvent('qb-moonshine:server:AddYeast')
-                QBCore.Functions.Notify('You Added some yeast', 'primary', 7500)
-                ClearPedTasks(PlayerPedId())
-            end)
-        else
-            QBCore.Functions.Notify('You missed a step in the process', 'error', 7500)
-        end
-    end, 'm-heatedbarley')
+    if QBCore.Functions.HasItem('m-heatedbarley') then
+        QBCore.Functions.Progressbar('name_here', 'Adding Yeast...', Config.ActionTime * 60, false, true, {
+            disableMovement = true,
+            disableCarMovement = true,
+            disableMouse = false,
+            disableCombat = true,
+        }, {
+            animDict = 'mini@repair',
+            anim = 'fixing_a_ped',
+            flags = 16,
+        }, {}, {}, function()
+            if Config.EnableFailing then
+                local chance = math.random(0, 100)
+                if chance < Config.FailChance then
+                    QBCore.Functions.Notify('You Failed this step, Try Again', 'error')
+                end
+            else
+            TriggerServerEvent('qb-moonshine:server:AddYeast')
+            QBCore.Functions.Notify('You Added some yeast', 'primary', 7500)
+            ClearPedTasks(PlayerPedId())
+        end)
+    else
+        QBCore.Functions.Notify('You Forgot to Add Barley', 'error')
+    end
 end)
 
 RegisterNetEvent('qb-moonshine:client:AddMash', function()
-    QBCore.Functions.TriggerCallback('QBCore:HasItem', function(HasItem)
-        if HasItem then
-
-            QBCore.Functions.Progressbar('name_here', 'Adding Mash...', 10000, false, true, {
-                disableMovement = true,
-                disableCarMovement = true,
-                disableMouse = false,
-                disableCombat = true,
-            }, {
-                animDict = 'mini@repair',
-                anim = 'fixing_a_ped',
-                flags = 16,
-            }, {}, {}, function()
-                TriggerServerEvent('qb-moonshine:server:AddMash')
-                QBCore.Functions.Notify('You add some mash', 'primary', 7500)
-                ClearPedTasks(PlayerPedId())
-            end)
-        else
-            QBCore.Functions.Notify('You missed a step. try again', 'error', 7500)
-        end
-    end, 'm-heatedmixture')
+    if QBCore.Functions.HasItem('m-heatedmixture') then
+        QBCore.Functions.Progressbar('name_here', 'Adding Mash...', Config.ActionTime * 60, false, true, {
+            disableMovement = true,
+            disableCarMovement = true,
+            disableMouse = false,
+            disableCombat = true,
+        }, {
+            animDict = 'mini@repair',
+            anim = 'fixing_a_ped',
+            flags = 16,
+        }, {}, {}, function()
+            if Config.EnableFailing then
+                local chance = math.random(0, 100)
+                if chance < Config.FailChance then
+                    QBCore.Functions.Notify('You Failed this step, Try Again', 'error')
+                end
+            else
+            TriggerServerEvent('qb-moonshine:server:AddMash')
+            QBCore.Functions.Notify('You add some mash', 'primary', 7500)
+            ClearPedTasks(PlayerPedId())
+        end)
+    else
+        QBCore.Functions.Notify('You missed a step', 'error')
+    end
 end)
 
 RegisterNetEvent('qb-moonshine:client:FinishMoonshine', function()
-    QBCore.Functions.TriggerCallback('QBCore:HasItem', function(HasItem)
-        if HasItem then
-
-            QBCore.Functions.Progressbar('name_here', 'Finishing Up...', 10000, false, true, {
-                disableMovement = true,
-                disableCarMovement = true,
-                disableMouse = false,
-                disableCombat = true,
-            }, {
-                animDict = 'mini@repair',
-                anim = 'fixing_a_ped',
-                flags = 16,
-            }, {}, {}, function()
-                TriggerServerEvent('qb-moonshine:server:FinishMoonshine')
-                QBCore.Functions.Notify('You made a batch of moonshine', 'primary', 7500)
-                ClearPedTasks(PlayerPedId())
-            end)
-        else
-            QBCore.Functions.Notify('You missed a step, go back', 'error', 7500)
-        end
-    end, 'm-moonshinemix')
+    if QBCore.Functions.HasItem('m-moonshinemix') then
+        QBCore.Functions.Progressbar('name_here', 'Finishing Up...', Config.ActionTime * 60, false, true, {
+            disableMovement = true,
+            disableCarMovement = true,
+            disableMouse = false,
+            disableCombat = true,
+        }, {
+            animDict = 'mini@repair',
+            anim = 'fixing_a_ped',
+            flags = 16,
+        }, {}, {}, function()
+            if Config.EnableFailing then
+                local chance = math.random(0, 100)
+                if chance < Config.FailChance then
+                    QBCore.Functions.Notify('You Failed this step, Try Again', 'error')
+                end
+            else
+            TriggerServerEvent('qb-moonshine:server:FinishMoonshine')
+            QBCore.Functions.Notify('You made a batch of moonshine', 'primary', 7500)
+            ClearPedTasks(PlayerPedId())
+        end)
+    else
+        QBCore.Functions.Notify('You missed a step', 'error')
+    end
 end)
 
 RegisterNetEvent('qb-menu:client:BuyMoonshineIngredients', function(data)
@@ -416,7 +434,7 @@ end
 
 
   function pickPotato()
-    QBCore.Functions.Progressbar("grind_coke", "Picking Potatos ..", math.random(5000,6000), false, true, {
+    QBCore.Functions.Progressbar("grind_coke", "Picking Potatos ..", Config.PickingTime * 60, false, true, {
         disableMovement = true,
         disableCarMovement = true,
         disableMouse = false,
@@ -433,7 +451,7 @@ end
 end
 
 function pickBarley()
-    QBCore.Functions.Progressbar("grind_coke", "Picking Barley ..", math.random(5000,6000), false, true, {
+    QBCore.Functions.Progressbar("grind_coke", "Picking Barley ..", Config.PickingTime * 60, false, true, {
         disableMovement = true,
         disableCarMovement = true,
         disableMouse = false,
