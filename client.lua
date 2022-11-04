@@ -70,7 +70,7 @@ RegisterNetEvent('qb-moonshine:client:GetMash', function()
 end)
 
 RegisterNetEvent('qb-moonshine:client:AddYeast', function()
-    if QBCore.Functions.HasItem('m-heatebarley') then
+    if QBCore.Functions.HasItem('m-heatedbarley') then
         QBCore.Functions.Progressbar('name_here', 'Adding Yeast...', Config.ActionTime * 60, false, true, {
             disableMovement = true,
             disableCarMovement = true,
@@ -85,11 +85,17 @@ RegisterNetEvent('qb-moonshine:client:AddYeast', function()
                 local chance = math.random(0, 100)
                 if chance < Config.FailChance then
                     QBCore.Functions.Notify('You Failed this step, Try Again', 'error')
+                    ClearPedTasks(PlayerPedId())
+                else
+                    TriggerServerEvent('qb-moonshine:server:AddYeast')
+                    QBCore.Functions.Notify('You Added some yeast', 'primary', 7500)
+                    ClearPedTasks(PlayerPedId())
                 end
             else
             TriggerServerEvent('qb-moonshine:server:AddYeast')
             QBCore.Functions.Notify('You Added some yeast', 'primary', 7500)
             ClearPedTasks(PlayerPedId())
+            end
         end)
     else
         QBCore.Functions.Notify('You Forgot to Add Barley', 'error')
@@ -112,11 +118,17 @@ RegisterNetEvent('qb-moonshine:client:HeatWater', function()
                 local chance = math.random(0, 100)
                 if chance < Config.FailChance then
                     QBCore.Functions.Notify('You Failed this step, Try Again', 'error')
+                    ClearPedTasks(PlayerPedId())
+                else
+                    TriggerServerEvent('qb-moonshine:server:HeatWater')
+                    QBCore.Functions.Notify('You Heated Some Water', 'primary', 7500)
+                    ClearPedTasks(PlayerPedId())
                 end
             else
             TriggerServerEvent('qb-moonshine:server:HeatWater')
             QBCore.Functions.Notify('You Heated Some Water', 'primary', 7500)
             ClearPedTasks(PlayerPedId())
+            end
         end)
     else
         QBCore.Functions.Notify('You Forgot to Add Water', 'error')
@@ -139,11 +151,17 @@ RegisterNetEvent('qb-moonshine:client:AddBarley', function()
                 local chance = math.random(0, 100)
                 if chance < Config.FailChance then
                     QBCore.Functions.Notify('You Failed this step, Try Again', 'error')
+                    ClearPedTasks(PlayerPedId())
+                else
+                    TriggerServerEvent('qb-moonshine:server:AddBarley')
+                    QBCore.Functions.Notify('You Added some Barley', 'primary', 7500)
+                    ClearPedTasks(PlayerPedId())
                 end
             else
             TriggerServerEvent('qb-moonshine:server:AddBarley')
             QBCore.Functions.Notify('You Added some Barley', 'primary', 7500)
             ClearPedTasks(PlayerPedId())
+            end
         end)
     else
         QBCore.Functions.Notify('You Forgot to Heat The Water', 'error')
@@ -166,11 +184,17 @@ RegisterNetEvent('qb-moonshine:client:AddYeast', function()
                 local chance = math.random(0, 100)
                 if chance < Config.FailChance then
                     QBCore.Functions.Notify('You Failed this step, Try Again', 'error')
+                    ClearPedTasks(PlayerPedId())
+                else
+                    TriggerServerEvent('qb-moonshine:server:AddYeast')
+                    QBCore.Functions.Notify('You Added some yeast', 'primary', 7500)
+                    ClearPedTasks(PlayerPedId())
                 end
             else
             TriggerServerEvent('qb-moonshine:server:AddYeast')
             QBCore.Functions.Notify('You Added some yeast', 'primary', 7500)
             ClearPedTasks(PlayerPedId())
+            end
         end)
     else
         QBCore.Functions.Notify('You Forgot to Add Barley', 'error')
@@ -193,11 +217,17 @@ RegisterNetEvent('qb-moonshine:client:AddMash', function()
                 local chance = math.random(0, 100)
                 if chance < Config.FailChance then
                     QBCore.Functions.Notify('You Failed this step, Try Again', 'error')
+                    ClearPedTasks(PlayerPedId())
+                else
+                    TriggerServerEvent('qb-moonshine:server:AddMash')
+                    QBCore.Functions.Notify('You add some mash', 'primary', 7500)
+                    ClearPedTasks(PlayerPedId())
                 end
             else
             TriggerServerEvent('qb-moonshine:server:AddMash')
             QBCore.Functions.Notify('You add some mash', 'primary', 7500)
             ClearPedTasks(PlayerPedId())
+            end
         end)
     else
         QBCore.Functions.Notify('You missed a step', 'error')
@@ -220,11 +250,17 @@ RegisterNetEvent('qb-moonshine:client:FinishMoonshine', function()
                 local chance = math.random(0, 100)
                 if chance < Config.FailChance then
                     QBCore.Functions.Notify('You Failed this step, Try Again', 'error')
+                    ClearPedTasks(PlayerPedId())
+                else
+                    TriggerServerEvent('qb-moonshine:server:FinishMoonshine')
+                    QBCore.Functions.Notify('You made a batch of moonshine', 'primary', 7500)
+                    ClearPedTasks(PlayerPedId())
                 end
             else
             TriggerServerEvent('qb-moonshine:server:FinishMoonshine')
             QBCore.Functions.Notify('You made a batch of moonshine', 'primary', 7500)
             ClearPedTasks(PlayerPedId())
+            end
         end)
     else
         QBCore.Functions.Notify('You missed a step', 'error')
