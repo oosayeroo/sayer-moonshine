@@ -470,7 +470,7 @@ end
 
 
   function pickPotato()
-    QBCore.Functions.Progressbar("grind_coke", "Picking Potatos ..", Config.PickingTime * 60, false, true, {
+    QBCore.Functions.Progressbar("grind_coke", "Picking Potatos ..", Config.PickingTime * 1000, false, true, {
         disableMovement = true,
         disableCarMovement = true,
         disableMouse = false,
@@ -487,7 +487,7 @@ end
 end
 
 function pickBarley()
-    QBCore.Functions.Progressbar("grind_coke", "Picking Barley ..", Config.PickingTime * 60, false, true, {
+    QBCore.Functions.Progressbar("grind_coke", "Picking Barley ..", Config.PickingTime * 1000, false, true, {
         disableMovement = true,
         disableCarMovement = true,
         disableMouse = false,
