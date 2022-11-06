@@ -71,7 +71,7 @@ end)
 
 RegisterNetEvent('qb-moonshine:client:AddYeast', function()
     if QBCore.Functions.HasItem('m-heatedbarley') then
-        QBCore.Functions.Progressbar('name_here', 'Adding Yeast...', Config.ActionTime * 60, false, true, {
+        QBCore.Functions.Progressbar('name_here', 'Adding Yeast...', Config.ActionTime * 1000, false, true, {
             disableMovement = true,
             disableCarMovement = true,
             disableMouse = false,
@@ -104,7 +104,7 @@ end)
 
 RegisterNetEvent('qb-moonshine:client:HeatWater', function()
     if QBCore.Functions.HasItem('m-waterjar') then
-        QBCore.Functions.Progressbar('name_here', 'Heating Water...', Config.ActionTime * 60, false, true, {
+        QBCore.Functions.Progressbar('name_here', 'Heating Water...', Config.ActionTime * 1000, false, true, {
             disableMovement = true,
             disableCarMovement = true,
             disableMouse = false,
@@ -137,7 +137,7 @@ end)
 
 RegisterNetEvent('qb-moonshine:client:AddBarley', function()
     if QBCore.Functions.HasItem('m-heatedwater') then
-        QBCore.Functions.Progressbar('name_here', 'Adding Barley...', Config.ActionTime * 60, false, true, {
+        QBCore.Functions.Progressbar('name_here', 'Adding Barley...', Config.ActionTime * 1000, false, true, {
             disableMovement = true,
             disableCarMovement = true,
             disableMouse = false,
@@ -170,7 +170,7 @@ end)
 
 RegisterNetEvent('qb-moonshine:client:AddYeast', function()
     if QBCore.Functions.HasItem('m-heatedbarley') then
-        QBCore.Functions.Progressbar('name_here', 'Adding Yeast...', Config.ActionTime * 60, false, true, {
+        QBCore.Functions.Progressbar('name_here', 'Adding Yeast...', Config.ActionTime * 1000, false, true, {
             disableMovement = true,
             disableCarMovement = true,
             disableMouse = false,
@@ -203,7 +203,7 @@ end)
 
 RegisterNetEvent('qb-moonshine:client:AddMash', function()
     if QBCore.Functions.HasItem('m-heatedmixture') then
-        QBCore.Functions.Progressbar('name_here', 'Adding Mash...', Config.ActionTime * 60, false, true, {
+        QBCore.Functions.Progressbar('name_here', 'Adding Mash...', Config.ActionTime * 1000, false, true, {
             disableMovement = true,
             disableCarMovement = true,
             disableMouse = false,
@@ -236,7 +236,7 @@ end)
 
 RegisterNetEvent('qb-moonshine:client:FinishMoonshine', function()
     if QBCore.Functions.HasItem('m-moonshinemix') then
-        QBCore.Functions.Progressbar('name_here', 'Finishing Up...', Config.ActionTime * 60, false, true, {
+        QBCore.Functions.Progressbar('name_here', 'Finishing Up...', Config.ActionTime * 1000, false, true, {
             disableMovement = true,
             disableCarMovement = true,
             disableMouse = false,
@@ -268,34 +268,66 @@ RegisterNetEvent('qb-moonshine:client:FinishMoonshine', function()
 end)
 
 RegisterNetEvent('qb-menu:client:BuyMoonshineIngredients', function(data)
-    exports['qb-menu']:openMenu({
-        {
-            
-            header = "| Available Products |",
-            isMenuHeader = true, 
-        },
-        {
-            
-            header = "• Moonshine Jars",
-            txt = "Buy Some Large Jugs",
-            params = {
-                event = "qb-moonshine:client:GetJars"
-            }
-        },  
-        {
-            
-            header = "• Yeast",
-            txt = "Buy Some Yeast",
-            params = {
-                event = "qb-moonshine:client:GetYeast"
-            }
-        },
-        {
-            id = 7,
-            header = "Close (ESC)",
-            isMenuHeader = true,
-        },
-    })
+    if Config.JimMenu == true then
+        exports['qb-menu']:openMenu({
+            {
+                
+                header = "| Available Products |",
+                isMenuHeader = true, 
+            },
+            {
+                
+                header = "• Moonshine Jars",
+                txt = "Buy Some Large Jugs",
+                icon = 'm-waterjar',
+                params = {
+                    event = "qb-moonshine:client:GetJars"
+                }
+            },  
+            {
+                
+                header = "• Yeast",
+                txt = "Buy Some Yeast",
+                icon = 'm-yeast',
+                params = {
+                    event = "qb-moonshine:client:GetYeast"
+                }
+            },
+            {
+                id = 7,
+                header = "Close (ESC)",
+                isMenuHeader = true,
+            },
+        })
+    else
+        exports['qb-menu']:openMenu({
+            {
+                
+                header = "| Available Products |",
+                isMenuHeader = true, 
+            },
+            {
+                
+                header = "• Moonshine Jars",
+                txt = "Buy Some Large Jugs",
+                params = {
+                    event = "qb-moonshine:client:GetJars"
+                }
+            },  
+            {
+                
+                header = "• Yeast",
+                txt = "Buy Some Yeast",
+                params = {
+                    event = "qb-moonshine:client:GetYeast"
+                }
+            },
+            {
+                id = 7,
+                header = "Close (ESC)",
+                isMenuHeader = true,
+            },
+        })
 end)
 
 CreateThread(function()

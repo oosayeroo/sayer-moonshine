@@ -1,6 +1,8 @@
 Config = {}
 
-Config.EnableLocations = "enabled"  --dont change this
+Config.JimMenu = false --set true if using jims menu found here https://github.com/jimathy/qb-menu
+
+Config.EnableLocations = "enabled"  --dont change this as third eye not setup
 Config.MoonshineLocations = {
     ["pick-potato1"] = {    --picking locations have a 20 metre radius. so best not to put them too close together. i designed it to work in a field
         [1] = vector3(2265.37, 5046.59, 44.35),
@@ -57,3 +59,5 @@ Config.MoonshineValue = 100  --how much 1 moonshine sells for at sell location
 --BREAK/FAIL SYSTEM--
 Config.EnableFailing = true --can fail a process
 Config.FailChance = 10 --in % chance that you fail a step.
+
+

@@ -115,15 +115,15 @@ RegisterNetEvent('qb-moonshine:server:AddMash', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local heatedmixture = Player.Functions.GetItemByName('m-heatedmixture')
-    local potato = Player.Functions.GetItemByName('m-potato')
+    local potato = Player.Functions.GetItemByName('m-mash')
 
     if heatedmixture ~= nil and potato ~= nil then
 
         Player.Functions.RemoveItem('m-heatedmixture', 1)
         TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['m-heatedmixture'], "remove")
 
-        Player.Functions.RemoveItem('m-potato', 1)
-        TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['m-potato'], "remove")
+        Player.Functions.RemoveItem('m-mash', 1)
+        TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['m-mash'], "remove")
 
         Player.Functions.AddItem('m-moonshinemix', 1)
         TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['m-moonshinemix'], "add")
