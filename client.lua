@@ -328,6 +328,7 @@ RegisterNetEvent('qb-menu:client:BuyMoonshineIngredients', function(data)
                 isMenuHeader = true,
             },
         })
+    end
 end)
 
 CreateThread(function()
