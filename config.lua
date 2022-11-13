@@ -43,6 +43,8 @@ Config.BarleyHarvestAmount = math.random(1, 4)  -- amont of barley to harvest ea
 
 --amounts needed--
 Config.MashAmountNeeded = 1 --amount of mash you need to add to make next step
+Config.YeastAmountNeeded = 1
+Config.BarleyAmountNeeded = 1
 
 --shop--
 Config.IngredientCost = math.random(100, 150)    --how much it costs for the jars
