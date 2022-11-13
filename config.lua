@@ -37,7 +37,7 @@ Config.ActionTime = 10 --in seconds (10 = 10 seconds)
 Config.PickingTime = 10
 
 --harvest--
-Conig.PickingRadius = 20 --how big the area you can pick at picking locations (20 is the default i left it at but change to whatever you like)
+Config.PickingRadius = 20 --how big the area you can pick at picking locations (20 is the default i left it at but change to whatever you like)
 Config.PotatoHarvestAmount = math.random(1, 4)  --amount of potato to harvest each time
 Config.BarleyHarvestAmount = math.random(1, 4)  -- amont of barley to harvest each time
 
