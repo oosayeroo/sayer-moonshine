@@ -19,7 +19,7 @@ DrawText3Ds = function(x, y, z, text)
 end
 
 RegisterNetEvent('qb-moonshine:client:GetJars', function()
-    QBCore.Functions.Progressbar('name_here', 'Grabbing some jars...', 5000, false, true, {
+    QBCore.Functions.Progressbar('name_here', 'Grabbing some jars...', 3000, false, true, {
         disableMovement = true,
         disableCarMovement = true,
         disableMouse = false,
@@ -36,7 +36,7 @@ RegisterNetEvent('qb-moonshine:client:GetJars', function()
 end)
 
 RegisterNetEvent('qb-moonshine:client:GetYeast', function()
-    QBCore.Functions.Progressbar('name_here', 'Purchasing Yeast...', 5000, false, true, {
+    QBCore.Functions.Progressbar('name_here', 'Purchasing Yeast...', 3000, false, true, {
         disableMovement = true,
         disableCarMovement = true,
         disableMouse = false,
@@ -53,53 +53,7 @@ RegisterNetEvent('qb-moonshine:client:GetYeast', function()
 end)
 
 RegisterNetEvent('qb-moonshine:client:GetMash', function()
-    QBCore.Functions.Progressbar('name_here', 'Making Mash...', 0, false, true, {
-        disableMovement = true,
-        disableCarMovement = true,
-        disableMouse = false,
-        disableCombat = true,
-    }, {
-        animDict = 'anim@gangops@facility@servers@',
-        anim = 'idle',
-        flags = 16,
-    }, {}, {}, function()
-        potatoMashing()
-        QBCore.Functions.Notify('You Made some Mash', 'primary', 7500)
-        ClearPedTasks(PlayerPedId())
-    end)
-end)
-
-RegisterNetEvent('qb-moonshine:client:AddYeast', function()
-    if QBCore.Functions.HasItem('m-heatedbarley') then
-        QBCore.Functions.Progressbar('name_here', 'Adding Yeast...', Config.ActionTime * 1000, false, true, {
-            disableMovement = true,
-            disableCarMovement = true,
-            disableMouse = false,
-            disableCombat = true,
-        }, {
-            animDict = 'mini@repair',
-            anim = 'fixing_a_ped',
-            flags = 16,
-        }, {}, {}, function()
-            if Config.EnableFailing then
-                local chance = math.random(0, 100)
-                if chance < Config.FailChance then
-                    QBCore.Functions.Notify('You Failed this step, Try Again', 'error')
-                    ClearPedTasks(PlayerPedId())
-                else
-                    TriggerServerEvent('qb-moonshine:server:AddYeast')
-                    QBCore.Functions.Notify('You Added some yeast', 'primary', 7500)
-                    ClearPedTasks(PlayerPedId())
-                end
-            else
-            TriggerServerEvent('qb-moonshine:server:AddYeast')
-            QBCore.Functions.Notify('You Added some yeast', 'primary', 7500)
-            ClearPedTasks(PlayerPedId())
-            end
-        end)
-    else
-        QBCore.Functions.Notify('You Forgot to Add Barley', 'error')
-    end
+    potatoMashing()
 end)
 
 RegisterNetEvent('qb-moonshine:client:HeatWater', function()
@@ -137,32 +91,42 @@ end)
 
 RegisterNetEvent('qb-moonshine:client:AddBarley', function()
     if QBCore.Functions.HasItem('m-heatedwater') then
-        QBCore.Functions.Progressbar('name_here', 'Adding Barley...', Config.ActionTime * 1000, false, true, {
-            disableMovement = true,
-            disableCarMovement = true,
-            disableMouse = false,
-            disableCombat = true,
-        }, {
-            animDict = 'mini@repair',
-            anim = 'fixing_a_ped',
-            flags = 16,
-        }, {}, {}, function()
-            if Config.EnableFailing then
-                local chance = math.random(0, 100)
-                if chance < Config.FailChance then
-                    QBCore.Functions.Notify('You Failed this step, Try Again', 'error')
-                    ClearPedTasks(PlayerPedId())
+        if QBCore.Functions.HasItem('m-barley', Config.BarleyAmountNeeded) then
+            QBCore.Functions.Progressbar('name_here', 'Adding Barley...', Config.ActionTime * 1000, false, true, {
+                disableMovement = true,
+                disableCarMovement = true,
+                disableMouse = false,
+                disableCombat = true,
+            }, {
+                animDict = 'mini@repair',
+                anim = 'fixing_a_ped',
+                flags = 16,
+            }, {}, {}, function()
+                if Config.EnableFailing then
+                    local chance = math.random(0, 100)
+                    if chance < Config.FailChance then
+                        if Config.LoseOnFail then
+                            TriggerServerEvent('qb-moonshine:server:LoseStage2')
+                            QBCore.Functions.Notify('You failed and lost the item', 'error', 2000)
+                            ClearPedTasks(PlayerPedId())
+                        else
+                        QBCore.Functions.Notify('You Failed this step, Try Again', 'error')
+                        ClearPedTasks(PlayerPedId())
+                        end
+                    else
+                        TriggerServerEvent('qb-moonshine:server:AddBarley')
+                        QBCore.Functions.Notify('You Added some Barley', 'primary', 7500)
+                        ClearPedTasks(PlayerPedId())
+                    end
                 else
-                    TriggerServerEvent('qb-moonshine:server:AddBarley')
-                    QBCore.Functions.Notify('You Added some Barley', 'primary', 7500)
-                    ClearPedTasks(PlayerPedId())
+                TriggerServerEvent('qb-moonshine:server:AddBarley')
+                QBCore.Functions.Notify('You Added some Barley', 'primary', 7500)
+                ClearPedTasks(PlayerPedId())
                 end
-            else
-            TriggerServerEvent('qb-moonshine:server:AddBarley')
-            QBCore.Functions.Notify('You Added some Barley', 'primary', 7500)
-            ClearPedTasks(PlayerPedId())
-            end
-        end)
+            end)
+        else
+            QBCore.Functions.Notify('you dont have enough barley', 'error', 2000)
+        end
     else
         QBCore.Functions.Notify('You Forgot to Heat The Water', 'error')
     end
@@ -170,32 +134,42 @@ end)
 
 RegisterNetEvent('qb-moonshine:client:AddYeast', function()
     if QBCore.Functions.HasItem('m-heatedbarley') then
-        QBCore.Functions.Progressbar('name_here', 'Adding Yeast...', Config.ActionTime * 1000, false, true, {
-            disableMovement = true,
-            disableCarMovement = true,
-            disableMouse = false,
-            disableCombat = true,
-        }, {
-            animDict = 'mini@repair',
-            anim = 'fixing_a_ped',
-            flags = 16,
-        }, {}, {}, function()
-            if Config.EnableFailing then
-                local chance = math.random(0, 100)
-                if chance < Config.FailChance then
-                    QBCore.Functions.Notify('You Failed this step, Try Again', 'error')
-                    ClearPedTasks(PlayerPedId())
+        if QBCore.Functions.HasItem('m-yeast', Config.YeastAmountNeeded) then
+            QBCore.Functions.Progressbar('name_here', 'Adding Yeast...', Config.ActionTime * 1000, false, true, {
+                disableMovement = true,
+                disableCarMovement = true,
+                disableMouse = false,
+                disableCombat = true,
+            }, {
+                animDict = 'mini@repair',
+                anim = 'fixing_a_ped',
+                flags = 16,
+            }, {}, {}, function()
+                if Config.EnableFailing then
+                    local chance = math.random(0, 100)
+                    if chance < Config.FailChance then
+                        if Config.LoseOnFail then
+                            TriggerServerEvent('qb-moonshine:server:LoseStage3')
+                            QBCore.Functions.Notify('You failed and lost the item', 'error', 2000)
+                            ClearPedTasks(PlayerPedId())
+                        else
+                        QBCore.Functions.Notify('You Failed this step, Try Again', 'error')
+                        ClearPedTasks(PlayerPedId())
+                        end
+                    else
+                        TriggerServerEvent('qb-moonshine:server:AddYeast')
+                        QBCore.Functions.Notify('You Added some yeast', 'primary', 7500)
+                        ClearPedTasks(PlayerPedId())
+                    end
                 else
-                    TriggerServerEvent('qb-moonshine:server:AddYeast')
-                    QBCore.Functions.Notify('You Added some yeast', 'primary', 7500)
-                    ClearPedTasks(PlayerPedId())
+                TriggerServerEvent('qb-moonshine:server:AddYeast')
+                QBCore.Functions.Notify('You Added some yeast', 'primary', 7500)
+                ClearPedTasks(PlayerPedId())
                 end
-            else
-            TriggerServerEvent('qb-moonshine:server:AddYeast')
-            QBCore.Functions.Notify('You Added some yeast', 'primary', 7500)
-            ClearPedTasks(PlayerPedId())
-            end
-        end)
+            end)
+        else
+            QBCore.Functions.Notify('you dont have enough yeast', 'error', 2000)
+        end
     else
         QBCore.Functions.Notify('You Forgot to Add Barley', 'error')
     end
@@ -203,34 +177,44 @@ end)
 
 RegisterNetEvent('qb-moonshine:client:AddMash', function()
     if QBCore.Functions.HasItem('m-heatedmixture') then
-        QBCore.Functions.Progressbar('name_here', 'Adding Mash...', Config.ActionTime * 1000, false, true, {
-            disableMovement = true,
-            disableCarMovement = true,
-            disableMouse = false,
-            disableCombat = true,
-        }, {
-            animDict = 'mini@repair',
-            anim = 'fixing_a_ped',
-            flags = 16,
-        }, {}, {}, function()
-            if Config.EnableFailing then
-                local chance = math.random(0, 100)
-                if chance < Config.FailChance then
-                    QBCore.Functions.Notify('You Failed this step, Try Again', 'error')
-                    ClearPedTasks(PlayerPedId())
+        if QBCore.Functions.HasItem('m-mash', Config.MashAmountNeeded) then
+            QBCore.Functions.Progressbar('name_here', 'Adding Mash...', Config.ActionTime * 1000, false, true, {
+                disableMovement = true,
+                disableCarMovement = true,
+                disableMouse = false,
+                disableCombat = true,
+            }, {
+                animDict = 'mini@repair',
+                anim = 'fixing_a_ped',
+                flags = 16,
+            }, {}, {}, function()
+                if Config.EnableFailing then
+                    local chance = math.random(0, 100)
+                    if chance < Config.FailChance then
+                        if Config.LoseOnFail then
+                            TriggerServerEvent('qb-moonshine:server:LoseStage4')
+                            QBCore.Functions.Notify('You failed and lost the item', 'error', 2000)
+                            ClearPedTasks(PlayerPedId())
+                        else
+                            QBCore.Functions.Notify('You Failed this step, Try Again', 'error')
+                            ClearPedTasks(PlayerPedId())
+                        end
+                    else
+                        TriggerServerEvent('qb-moonshine:server:AddMash')
+                        QBCore.Functions.Notify('You add some mash', 'primary', 7500)
+                        ClearPedTasks(PlayerPedId())
+                    end
                 else
-                    TriggerServerEvent('qb-moonshine:server:AddMash')
-                    QBCore.Functions.Notify('You add some mash', 'primary', 7500)
-                    ClearPedTasks(PlayerPedId())
+                TriggerServerEvent('qb-moonshine:server:AddMash')
+                QBCore.Functions.Notify('You add some mash', 'primary', 7500)
+                ClearPedTasks(PlayerPedId())
                 end
-            else
-            TriggerServerEvent('qb-moonshine:server:AddMash')
-            QBCore.Functions.Notify('You add some mash', 'primary', 7500)
-            ClearPedTasks(PlayerPedId())
-            end
-        end)
+            end)
+        else
+            QBCore.Functions.Notify('You dont have enough mash', 'error', 2000)
+        end
     else
-        QBCore.Functions.Notify('You missed a step', 'error')
+        QBCore.Functions.Notify('You missed a step', 'error', 2000)
     end
 end)
 
@@ -249,8 +233,14 @@ RegisterNetEvent('qb-moonshine:client:FinishMoonshine', function()
             if Config.EnableFailing then
                 local chance = math.random(0, 100)
                 if chance < Config.FailChance then
+                    if Config.LoseOnFail then
+                        TriggerServerEvent('qb-moonshine:server:LoseStage5')
+                        QBCore.Functions.Notify('You failed and lost the item', 'error', 2000)
+                        ClearPedTasks(PlayerPedId())
+                    else
                     QBCore.Functions.Notify('You Failed this step, Try Again', 'error')
                     ClearPedTasks(PlayerPedId())
+                    end
                 else
                     TriggerServerEvent('qb-moonshine:server:FinishMoonshine')
                     QBCore.Functions.Notify('You made a batch of moonshine', 'primary', 7500)
@@ -337,6 +327,7 @@ CreateThread(function()
             sleep = 100
             local pos = GetEntityCoords(PlayerPedId())
             local PlayerData = QBCore.Functions.GetPlayerData()
+            local radius = Config.PickingRadius
             
             for k, v in pairs(Config.MoonshineLocations["buy-ingredients"]) do
                 if #(pos - vector3(v.x, v.y, v.z)) < 0.9 then
@@ -352,21 +343,7 @@ CreateThread(function()
             end
 
             for k, v in pairs(Config.MoonshineLocations["pick-potato1"]) do
-                if #(pos - vector3(v.x, v.y, v.z)) < 20 then
-                    sleep = 0
-                    QBCore.Functions.DrawText3D(v.x, v.y, v.z, "~g~[E]~w~ - Pick Potato")
-                    if IsControlJustReleased(0, 38) then
-                        PrepareAnim()
-                        pickPotato()
-                    end
-                elseif #(pos - vector3(v.x, v.y, v.z)) < 1.5 then
-                    sleep = 0
-                    QBCore.Functions.DrawText3D(v.x, v.y, v.z, "Pick Potato")
-                end
-            end
-
-            for k, v in pairs(Config.MoonshineLocations["pick-potato2"]) do
-                if #(pos - vector3(v.x, v.y, v.z)) < 20 then
+                if #(pos - vector3(v.x, v.y, v.z)) < radius then
                     sleep = 0
                     QBCore.Functions.DrawText3D(v.x, v.y, v.z, "~g~[E]~w~ - Pick Potato")
                     if IsControlJustReleased(0, 38) then
@@ -380,21 +357,7 @@ CreateThread(function()
             end
 
             for k, v in pairs(Config.MoonshineLocations["pick-barley1"]) do
-                if #(pos - vector3(v.x, v.y, v.z)) < 20 then
-                    sleep = 0
-                    QBCore.Functions.DrawText3D(v.x, v.y, v.z, "~g~[E]~w~ - Pick Barley")
-                    if IsControlJustReleased(0, 38) then
-                        PrepareAnim()
-                        pickBarley()
-                    end
-                elseif #(pos - vector3(v.x, v.y, v.z)) < 1.5 then
-                    sleep = 0
-                    QBCore.Functions.DrawText3D(v.x, v.y, v.z, "Pick Barley")
-                end
-            end
-
-            for k, v in pairs(Config.MoonshineLocations["pick-barley2"]) do
-                if #(pos - vector3(v.x, v.y, v.z)) < 20 then
+                if #(pos - vector3(v.x, v.y, v.z)) < radius then
                     sleep = 0
                     QBCore.Functions.DrawText3D(v.x, v.y, v.z, "~g~[E]~w~ - Pick Barley")
                     if IsControlJustReleased(0, 38) then

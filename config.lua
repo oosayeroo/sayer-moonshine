@@ -6,15 +6,11 @@ Config.EnableLocations = "enabled"  --dont change this as third eye not setup
 Config.MoonshineLocations = {
     ["pick-potato1"] = {    --picking locations have a 20 metre radius. so best not to put them too close together. i designed it to work in a field
         [1] = vector3(2265.37, 5046.59, 44.35),
-    },
-    ["pick-potato2"] = {
-        [1] = vector3(2251.11, 5061.73, 45.61),
+        [2] = vector3(2251.11, 5061.73, 45.61),
     },
     ["pick-barley1"] = {
         [1] = vector3(2224.25, 5088.56, 49.33),
-    },
-    ["pick-barley2"] = {
-        [1] = vector3(2205.49, 5107.97, 50.74),
+        [2] = vector3(2205.49, 5107.97, 50.74),
     },
     ["buy-ingredients"] = {
         [1] = vector3(1697.43, 4872.3, 42.03),
@@ -41,8 +37,12 @@ Config.ActionTime = 10 --in seconds (10 = 10 seconds)
 Config.PickingTime = 10
 
 --harvest--
+Conig.PickingRadius = 20 --how big the area you can pick at picking locations (20 is the default i left it at but change to whatever you like)
 Config.PotatoHarvestAmount = math.random(1, 4)  --amount of potato to harvest each time
 Config.BarleyHarvestAmount = math.random(1, 4)  -- amont of barley to harvest each time
+
+--amounts needed--
+Config.MashAmountNeeded = 1 --amount of mash you need to add to make next step
 
 --shop--
 Config.IngredientCost = math.random(100, 150)    --how much it costs for the jars
@@ -58,6 +58,7 @@ Config.MoonshineValue = 100  --how much 1 moonshine sells for at sell location
 
 --BREAK/FAIL SYSTEM--
 Config.EnableFailing = true --can fail a process
+Config.LoseOnFail = false --makes it so you lose the item upon failing if you have enablefailing = true
 Config.FailChance = 10 --in % chance that you fail a step.
 
 

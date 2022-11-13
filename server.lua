@@ -66,8 +66,6 @@ RegisterNetEvent('qb-moonshine:server:HeatWater', function()
     if waterjar ~= nil then
 
         Player.Functions.RemoveItem('m-waterjar', 1)
-        TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['m-waterjar'], "remove")
-
         Player.Functions.AddItem('m-heatedwater', 1)
         TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['m-heatedwater'], "add")
     end
@@ -82,11 +80,7 @@ RegisterNetEvent('qb-moonshine:server:AddBarley', function()
     if heatedwater ~= nil and barley ~= nil then
 
         Player.Functions.RemoveItem('m-heatedwater', 1)
-        TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['m-heatedwater'], "remove")
-
-        Player.Functions.RemoveItem('m-barley', 1)
-        TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['m-barley'], "remove")
-
+        Player.Functions.RemoveItem('m-barley', Config.BarleyAmountNeeded)
         Player.Functions.AddItem('m-heatedbarley', 1)
         TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['m-heatedbarley'], "add")
     end
@@ -101,11 +95,7 @@ RegisterNetEvent('qb-moonshine:server:AddYeast', function()
     if heatedbarley ~= nil and yeast ~= nil then
 
         Player.Functions.RemoveItem('m-heatedbarley', 1)
-        TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['m-heatedbarley'], "remove")
-
-        Player.Functions.RemoveItem('m-yeast', 1)
-        TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['m-yeast'], "remove")
-
+        Player.Functions.RemoveItem('m-yeast', Config.YeastAmountNeeded)
         Player.Functions.AddItem('m-heatedmixture', 1)
         TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['m-heatedmixture'], "add")
     end
@@ -120,11 +110,7 @@ RegisterNetEvent('qb-moonshine:server:AddMash', function()
     if heatedmixture ~= nil and potato ~= nil then
 
         Player.Functions.RemoveItem('m-heatedmixture', 1)
-        TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['m-heatedmixture'], "remove")
-
-        Player.Functions.RemoveItem('m-mash', 1)
-        TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['m-mash'], "remove")
-
+        Player.Functions.RemoveItem('m-mash', Config.MashAmountNeeded)
         Player.Functions.AddItem('m-moonshinemix', 1)
         TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['m-moonshinemix'], "add")
     end
@@ -138,12 +124,53 @@ RegisterNetEvent('qb-moonshine:server:FinishMoonshine', function()
     if moonshinemix ~= nil then
 
         Player.Functions.RemoveItem('m-moonshinemix', 1)
-        TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['m-moonshinemix'], "remove")
 
         Player.Functions.AddItem('m-moonshine', Config.BatchAmount)
         TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['m-moonshine'], "add")
     end
 end)
+
+RegisterNetEvent('qb-moonshine:server:LoseStage2', function()
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    local item = 'm-heatedwater'
+    local item2 = 'm-barley'
+    Player.Functions.RemoveItem(item, 1)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "remove")
+    Player.Functions.RemoveItem(item2, Config.BarleyAmountNeeded)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item2], "remove")
+end)
+
+RegisterNetEvent('qb-moonshine:server:LoseStage3', function()
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    local item = 'm-heatedbarley'
+    local item2 = 'm-yeast'
+    Player.Functions.RemoveItem(item, 1)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "remove")
+    Player.Functions.RemoveItem(item2, Config.YeastAmountNeeded)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item2], "remove")
+end)
+
+RegisterNetEvent('qb-moonshine:server:LoseStage4', function()
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    local item = 'm-heatedmixture'
+    local item2 = 'm-mash'
+    Player.Functions.RemoveItem(item, 1)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "remove")
+    Player.Functions.RemoveItem(item2, Config.MashAmountNeeded)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item2], "remove")
+end)
+
+RegisterNetEvent('qb-moonshine:server:LoseStage5', function()
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    local item = 'm-moonshinemix'
+    Player.Functions.RemoveItem(item, 1)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['m-moonshinemix'], "remove")
+end)
+
 
 --Selling ---
 RegisterNetEvent('qb-moonshine:server:SellMoonshine', function()
