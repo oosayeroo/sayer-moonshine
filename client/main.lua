@@ -285,92 +285,109 @@ end)
 CreateThread(function()
     if Config.EnableLocations == "enabled" then
         while true do
+            sleep = 100
             local pos = GetEntityCoords(PlayerPedId())
             local PlayerData = QBCore.Functions.GetPlayerData()
             local radius = Config.PickingRadius
                 for k, v in pairs(Config.MoonshineLocations["buy-ingredients"]) do
                     if #(pos - vector3(v.x, v.y, v.z)) < 0.9 then
+                        sleep = 0
                         QBCore.Functions.DrawText3D(v.x, v.y, v.z, "~g~[E]~w~ - Buy Ingredients")
                         if IsControlJustReleased(0, 38) then
                             TriggerEvent("qb-menu:client:BuyMoonshineIngredients")
                         end
                     elseif #(pos - vector3(v.x, v.y, v.z)) < 1.5 then
+                        sleep = 0
                         QBCore.Functions.DrawText3D(v.x, v.y, v.z, "Buy Ingredients")
                     end
                 end
                 for k, v in pairs(Config.MoonshineLocations["pick-potato1"]) do
                     if #(pos - vector3(v.x, v.y, v.z)) < radius then
+                        sleep = 0
                         QBCore.Functions.DrawText3D(v.x, v.y, v.z, "~g~[E]~w~ - Pick Potato")
                         if IsControlJustReleased(0, 38) then
                             PrepareAnim()
                             pickCrop("potato")
                         end
                     elseif #(pos - vector3(v.x, v.y, v.z)) < 1.5 then
+                        sleep = 0
                         QBCore.Functions.DrawText3D(v.x, v.y, v.z, "Pick Potato")
                     end
                 end
                 for k, v in pairs(Config.MoonshineLocations["pick-barley1"]) do
                     if #(pos - vector3(v.x, v.y, v.z)) < radius then
+                        sleep = 0
                         QBCore.Functions.DrawText3D(v.x, v.y, v.z, "~g~[E]~w~ - Pick Barley")
                         if IsControlJustReleased(0, 38) then
                             PrepareAnim()
                             pickCrop("barley")
                         end
                     elseif #(pos - vector3(v.x, v.y, v.z)) < 1.5 then
+                        sleep = 0
                         QBCore.Functions.DrawText3D(v.x, v.y, v.z, "Pick Barley")
                     end
                 end
                 for k, v in pairs(Config.MoonshineLocations["heat-water"]) do
                     if #(pos - vector3(v.x, v.y, v.z)) < 0.8 then
+                        sleep = 0
                         QBCore.Functions.DrawText3D(v.x, v.y, v.z, "~g~[E]~w~ - Heat Water")
                         if IsControlJustReleased(0, 38) then
                             TriggerEvent("sayer-moonshine:client:HeatWater")
                         end
                     elseif #(pos - vector3(v.x, v.y, v.z)) < 2.5 then
+                        sleep = 0
                         QBCore.Functions.DrawText3D(v.x, v.y, v.z, "Heat Water")
                     end
                 end
                 for k, v in pairs(Config.MoonshineLocations["add-barley"]) do
                     if #(pos - vector3(v.x, v.y, v.z)) < 0.9 then
+                        sleep = 0
                         QBCore.Functions.DrawText3D(v.x, v.y, v.z, "~g~[E]~w~ - Add Barley")
                         if IsControlJustReleased(0, 38) then
                             TriggerEvent("sayer-moonshine:client:AddBarley")
                         end
                     elseif #(pos - vector3(v.x, v.y, v.z)) < 1.5 then
+                        sleep = 0
                         QBCore.Functions.DrawText3D(v.x, v.y, v.z, "Add Barley")
                     end
                 end
                 for k, v in pairs(Config.MoonshineLocations["add-yeast"]) do
                     if #(pos - vector3(v.x, v.y, v.z)) < 1.5 then
+                        sleep = 0
                         QBCore.Functions.DrawText3D(v.x, v.y, v.z, "~g~[E]~w~ - Add Yeast")
                         if IsControlJustReleased(0, 38) then
                             TriggerEvent("sayer-moonshine:client:AddYeast")
                         end
                     elseif #(pos - vector3(v.x, v.y, v.z)) < 1.5 then
+                        sleep = 0
                         QBCore.Functions.DrawText3D(v.x, v.y, v.z, "Add Yeast")
                     end
                 end
                 for k, v in pairs(Config.MoonshineLocations["ferment-mash"]) do
                     if #(pos - vector3(v.x, v.y, v.z)) < 1.5 then
+                        sleep = 0
                         QBCore.Functions.DrawText3D(v.x, v.y, v.z, "~g~[E]~w~ - Ferment Mash")
                         if IsControlJustReleased(0, 38) then
                             TriggerEvent("sayer-moonshine:client:AddMash")
                         end
                     elseif #(pos - vector3(v.x, v.y, v.z)) < 1.5 then
+                        sleep = 0
                         QBCore.Functions.DrawText3D(v.x, v.y, v.z, "Add Mash")
                     end
                 end
                 for k, v in pairs(Config.MoonshineLocations["finish-moonshine"]) do
                     if #(pos - vector3(v.x, v.y, v.z)) < 1.5 then
+                        sleep = 0
                         QBCore.Functions.DrawText3D(v.x, v.y, v.z, "~g~[E]~w~ - Finish Moonshine")
                         if IsControlJustReleased(0, 38) then
                             TriggerEvent("sayer-moonshine:client:FinishMoonshine")
                         end
                     elseif #(pos - vector3(v.x, v.y, v.z)) < 1.5 then
+                        sleep = 0
                         QBCore.Functions.DrawText3D(v.x, v.y, v.z, "Finish Moonshine")
                     end   
                 end
-            Citizen.Wait(100)
+            Wait(sleep)
         end
     end
 end)
