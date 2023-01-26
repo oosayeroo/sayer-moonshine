@@ -37,11 +37,11 @@ DrawText3Ds = function(x, y, z, text)
     ClearDrawOrigin()
 end
 
-RegisterNetEvent('qb-moonshine:client:GetMash', function()
+RegisterNetEvent('sayer-moonshine:client:GetMash', function()
     potatoMashing()
 end)
 
-RegisterNetEvent('qb-moonshine:client:HeatWater', function()
+RegisterNetEvent('sayer-moonshine:client:HeatWater', function()
     if QBCore.Functions.HasItem(Config.Items["Waterjar"]) then
         QBCore.Functions.Progressbar('name_here', 'Heating Water...', Config.ActionTime * 1000, false, true, {
             disableMovement = true,
@@ -59,12 +59,12 @@ RegisterNetEvent('qb-moonshine:client:HeatWater', function()
                     QBCore.Functions.Notify('You Failed this step, Try Again', 'error')
                     ClearPedTasks(PlayerPedId())
                 else
-                    TriggerServerEvent('qb-moonshine:server:HeatWater')
+                    TriggerServerEvent('sayer-moonshine:server:HeatWater')
                     QBCore.Functions.Notify('You Heated Some Water', 'primary', 7500)
                     ClearPedTasks(PlayerPedId())
                 end
             else
-            TriggerServerEvent('qb-moonshine:server:HeatWater')
+            TriggerServerEvent('sayer-moonshine:server:HeatWater')
             QBCore.Functions.Notify('You Heated Some Water', 'primary', 7500)
             ClearPedTasks(PlayerPedId())
             end
@@ -74,7 +74,7 @@ RegisterNetEvent('qb-moonshine:client:HeatWater', function()
     end
 end)
 
-RegisterNetEvent('qb-moonshine:client:AddBarley', function()
+RegisterNetEvent('sayer-moonshine:client:AddBarley', function()
     if QBCore.Functions.HasItem(Config.Items["HeatedWater"]) then
         if QBCore.Functions.HasItem(Config.Items["Barley"], Config.BarleyAmountNeeded) then
             QBCore.Functions.Progressbar('name_here', 'Adding Barley...', Config.ActionTime * 1000, false, true, {
@@ -91,7 +91,7 @@ RegisterNetEvent('qb-moonshine:client:AddBarley', function()
                     local chance = math.random(0, 100)
                     if chance < Config.FailChance then
                         if Config.LoseOnFail then
-                            TriggerServerEvent('qb-moonshine:server:LoseStage2')
+                            TriggerServerEvent('sayer-moonshine:server:LoseStage2')
                             QBCore.Functions.Notify('You failed and lost the item', 'error', 2000)   
                             ClearPedTasks(PlayerPedId())
                         else
@@ -107,12 +107,12 @@ RegisterNetEvent('qb-moonshine:client:AddBarley', function()
                             end
                         end  
                     else
-                        TriggerServerEvent('qb-moonshine:server:AddBarley')
+                        TriggerServerEvent('sayer-moonshine:server:AddBarley')
                         QBCore.Functions.Notify('You Added some Barley', 'primary', 7500)
                         ClearPedTasks(PlayerPedId())
                     end
                 else
-                TriggerServerEvent('qb-moonshine:server:AddBarley')
+                TriggerServerEvent('sayer-moonshine:server:AddBarley')
                 QBCore.Functions.Notify('You Added some Barley', 'primary', 7500)
                 ClearPedTasks(PlayerPedId())
                 end
@@ -125,7 +125,7 @@ RegisterNetEvent('qb-moonshine:client:AddBarley', function()
     end
 end)
 
-RegisterNetEvent('qb-moonshine:client:AddYeast', function()
+RegisterNetEvent('sayer-moonshine:client:AddYeast', function()
     if QBCore.Functions.HasItem(Config.Items["HeatedBarley"]) then
         if QBCore.Functions.HasItem(Config.Items["Yeast"], Config.YeastAmountNeeded) then
             QBCore.Functions.Progressbar('name_here', 'Adding Yeast...', Config.ActionTime * 1000, false, true, {
@@ -142,7 +142,7 @@ RegisterNetEvent('qb-moonshine:client:AddYeast', function()
                     local chance = math.random(0, 100)
                     if chance < Config.FailChance then
                         if Config.LoseOnFail then
-                            TriggerServerEvent('qb-moonshine:server:LoseStage3')
+                            TriggerServerEvent('sayer-moonshine:server:LoseStage3')
                             QBCore.Functions.Notify('You failed and lost the item', 'error', 2000)
                             ClearPedTasks(PlayerPedId())
                         else
@@ -158,12 +158,12 @@ RegisterNetEvent('qb-moonshine:client:AddYeast', function()
                             end
                         end 
                     else
-                        TriggerServerEvent('qb-moonshine:server:AddYeast')
+                        TriggerServerEvent('sayer-moonshine:server:AddYeast')
                         QBCore.Functions.Notify('You Added some yeast', 'primary', 7500)
                         ClearPedTasks(PlayerPedId())
                     end
                 else
-                TriggerServerEvent('qb-moonshine:server:AddYeast')
+                TriggerServerEvent('sayer-moonshine:server:AddYeast')
                 QBCore.Functions.Notify('You Added some yeast', 'primary', 7500)
                 ClearPedTasks(PlayerPedId())
                 end
@@ -176,7 +176,7 @@ RegisterNetEvent('qb-moonshine:client:AddYeast', function()
     end
 end)
 
-RegisterNetEvent('qb-moonshine:client:AddMash', function()
+RegisterNetEvent('sayer-moonshine:client:AddMash', function()
     if QBCore.Functions.HasItem(Config.Items["HeatedMixture"]) then
         if QBCore.Functions.HasItem(Config.Items["Mash"], Config.MashAmountNeeded) then
             QBCore.Functions.Progressbar('name_here', 'Adding Mash...', Config.ActionTime * 1000, false, true, {
@@ -193,7 +193,7 @@ RegisterNetEvent('qb-moonshine:client:AddMash', function()
                     local chance = math.random(0, 100)
                     if chance < Config.FailChance then
                         if Config.LoseOnFail then
-                            TriggerServerEvent('qb-moonshine:server:LoseStage4')
+                            TriggerServerEvent('sayer-moonshine:server:LoseStage4')
                             QBCore.Functions.Notify('You failed and lost the item', 'error', 2000)
                             ClearPedTasks(PlayerPedId())
                         else
@@ -209,12 +209,12 @@ RegisterNetEvent('qb-moonshine:client:AddMash', function()
                             end
                         end 
                     else
-                        TriggerServerEvent('qb-moonshine:server:AddMash')
+                        TriggerServerEvent('sayer-moonshine:server:AddMash')
                         QBCore.Functions.Notify('You add some mash', 'primary', 7500)
                         ClearPedTasks(PlayerPedId())
                     end
                 else
-                TriggerServerEvent('qb-moonshine:server:AddMash')
+                TriggerServerEvent('sayer-moonshine:server:AddMash')
                 QBCore.Functions.Notify('You add some mash', 'primary', 7500)
                 ClearPedTasks(PlayerPedId())
                 end
@@ -227,7 +227,7 @@ RegisterNetEvent('qb-moonshine:client:AddMash', function()
     end
 end)
 
-RegisterNetEvent('qb-moonshine:client:FinishMoonshine', function()
+RegisterNetEvent('sayer-moonshine:client:FinishMoonshine', function()
     if QBCore.Functions.HasItem(Config.Items["MoonshineMix"]) then
         QBCore.Functions.Progressbar('name_here', 'Finishing Up...', Config.ActionTime * 1000, false, true, {
             disableMovement = true,
@@ -243,7 +243,7 @@ RegisterNetEvent('qb-moonshine:client:FinishMoonshine', function()
                 local chance = math.random(0, 100)
                 if chance < Config.FailChance then
                     if Config.LoseOnFail then
-                        TriggerServerEvent('qb-moonshine:server:LoseStage5')
+                        TriggerServerEvent('sayer-moonshine:server:LoseStage5')
                         QBCore.Functions.Notify('You failed and lost the item', 'error', 2000)
                         ClearPedTasks(PlayerPedId())
                     else
@@ -259,12 +259,12 @@ RegisterNetEvent('qb-moonshine:client:FinishMoonshine', function()
                         end
                     end 
                 else
-                    TriggerServerEvent('qb-moonshine:server:FinishMoonshine')
+                    TriggerServerEvent('sayer-moonshine:server:FinishMoonshine')
                     QBCore.Functions.Notify('You made a batch of moonshine', 'primary', 7500)
                     ClearPedTasks(PlayerPedId())
                 end
             else
-            TriggerServerEvent('qb-moonshine:server:FinishMoonshine')
+            TriggerServerEvent('sayer-moonshine:server:FinishMoonshine')
             QBCore.Functions.Notify('You made a batch of moonshine', 'primary', 7500)
             ClearPedTasks(PlayerPedId())
             end
@@ -324,7 +324,7 @@ CreateThread(function()
                     if #(pos - vector3(v.x, v.y, v.z)) < 0.8 then
                         QBCore.Functions.DrawText3D(v.x, v.y, v.z, "~g~[E]~w~ - Heat Water")
                         if IsControlJustReleased(0, 38) then
-                            TriggerEvent("qb-moonshine:client:HeatWater")
+                            TriggerEvent("sayer-moonshine:client:HeatWater")
                         end
                     elseif #(pos - vector3(v.x, v.y, v.z)) < 2.5 then
                         QBCore.Functions.DrawText3D(v.x, v.y, v.z, "Heat Water")
@@ -334,7 +334,7 @@ CreateThread(function()
                     if #(pos - vector3(v.x, v.y, v.z)) < 0.9 then
                         QBCore.Functions.DrawText3D(v.x, v.y, v.z, "~g~[E]~w~ - Add Barley")
                         if IsControlJustReleased(0, 38) then
-                            TriggerEvent("qb-moonshine:client:AddBarley")
+                            TriggerEvent("sayer-moonshine:client:AddBarley")
                         end
                     elseif #(pos - vector3(v.x, v.y, v.z)) < 1.5 then
                         QBCore.Functions.DrawText3D(v.x, v.y, v.z, "Add Barley")
@@ -344,7 +344,7 @@ CreateThread(function()
                     if #(pos - vector3(v.x, v.y, v.z)) < 1.5 then
                         QBCore.Functions.DrawText3D(v.x, v.y, v.z, "~g~[E]~w~ - Add Yeast")
                         if IsControlJustReleased(0, 38) then
-                            TriggerEvent("qb-moonshine:client:AddYeast")
+                            TriggerEvent("sayer-moonshine:client:AddYeast")
                         end
                     elseif #(pos - vector3(v.x, v.y, v.z)) < 1.5 then
                         QBCore.Functions.DrawText3D(v.x, v.y, v.z, "Add Yeast")
@@ -354,7 +354,7 @@ CreateThread(function()
                     if #(pos - vector3(v.x, v.y, v.z)) < 1.5 then
                         QBCore.Functions.DrawText3D(v.x, v.y, v.z, "~g~[E]~w~ - Ferment Mash")
                         if IsControlJustReleased(0, 38) then
-                            TriggerEvent("qb-moonshine:client:AddMash")
+                            TriggerEvent("sayer-moonshine:client:AddMash")
                         end
                     elseif #(pos - vector3(v.x, v.y, v.z)) < 1.5 then
                         QBCore.Functions.DrawText3D(v.x, v.y, v.z, "Add Mash")
@@ -364,7 +364,7 @@ CreateThread(function()
                     if #(pos - vector3(v.x, v.y, v.z)) < 1.5 then
                         QBCore.Functions.DrawText3D(v.x, v.y, v.z, "~g~[E]~w~ - Finish Moonshine")
                         if IsControlJustReleased(0, 38) then
-                            TriggerEvent("qb-moonshine:client:FinishMoonshine")
+                            TriggerEvent("sayer-moonshine:client:FinishMoonshine")
                         end
                     elseif #(pos - vector3(v.x, v.y, v.z)) < 1.5 then
                         QBCore.Functions.DrawText3D(v.x, v.y, v.z, "Finish Moonshine")
@@ -405,9 +405,9 @@ function pickCrop(cropType)
     if QBCore.Functions.HasItem(Config.Items["Trowel"]) then
         local eventName = ""
         if cropType == "potato" then
-            eventName = "qb-moonshine:server:GetPotato"
+            eventName = "sayer-moonshine:server:GetPotato"
         elseif cropType == "barley" then
-            eventName = "qb-moonshine:server:GetBarley"
+            eventName = "sayer-moonshine:server:GetBarley"
         end
         QBCore.Functions.Progressbar("grind_coke", "Picking ".. cropType .." ..", Config.PickingTime * 1000, false, true, {
             disableMovement = true,
@@ -436,7 +436,7 @@ function potatoMashing()
         disableMouse = false,
         disableCombat = true,
     }, {}, {}, {}, function() -- Done
-        TriggerServerEvent("qb-moonshine:server:GetMash")
+        TriggerServerEvent("sayer-moonshine:server:GetMash")
         ClearPedTasks(PlayerPedId())
         picking = false
     end, function() -- Cancel
@@ -462,7 +462,7 @@ CreateThread(function()
 
                     DrawText3Ds(sl.x, sl.y, sl.z, '~g~E~w~ - Sell Moonshine') 
                     if IsControlJustPressed(0, 38) then
-                        TriggerServerEvent('qb-moonshine:server:SellMoonshine')
+                        TriggerServerEvent('sayer-moonshine:server:SellMoonshine')
                     end
                 end
             end
@@ -474,7 +474,7 @@ CreateThread(function()
     end
 end)
 
-RegisterNetEvent('qb-moonshine:debugpicking', function()
+RegisterNetEvent('sayer-moonshine:debugpicking', function()
     picking = false
     print(picking)
     QBCore.Functions.Notify('Debug SuccessFul', 'success', 2000)
@@ -482,13 +482,13 @@ end)
 
 function FailFire(coords, time)
     for _ = 1, math.random(1, 7), 1 do
-        TriggerServerEvent("qb-moonshine:StartServerFire", coords, 24, false)
+        TriggerServerEvent("sayer-moonshine:StartServerFire", coords, 24, false)
     end
     Wait(time)
-    TriggerServerEvent("qb-moonshine:StopFires")
+    TriggerServerEvent("sayer-moonshine:StopFires")
 end
 
-RegisterNetEvent('qb-moonshine:StartFire', function(coords, maxChildren, isGasFire)
+RegisterNetEvent('sayer-moonshine:StartFire', function(coords, maxChildren, isGasFire)
     if #(vector3(coords.x, coords.y, coords.z) - GetEntityCoords(PlayerPedId())) < 100 then
         local pos = {
             x = coords.x,
@@ -501,7 +501,7 @@ RegisterNetEvent('qb-moonshine:StartFire', function(coords, maxChildren, isGasFi
     end
 end)
 
-RegisterNetEvent('qb-moonshine:StopFires', function()
+RegisterNetEvent('sayer-moonshine:StopFires', function()
     for i = 1, #currentFires do
         RemoveScriptFire(currentFires[i])
     end
