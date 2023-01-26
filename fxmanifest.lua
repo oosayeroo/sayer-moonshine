@@ -6,7 +6,7 @@ author 'oosayeroo'
 
 description 'sayer-moonshine'
 
-version '2.0.1'
+version '2.0.2'
 
 client_scripts{
     'client/main.lua'
