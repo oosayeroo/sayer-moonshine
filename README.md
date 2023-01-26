@@ -21,7 +21,8 @@ Add to qb-core/shared/items.lua:
 	['m-barley'] 	              	 = {['name'] = 'm-barley', 	                	['label'] = 'Barley', 	         	['weight'] = 100, 		['type'] = 'item', 		['image'] = 'm-barley.png', 	          	['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Barley For Mixing Things'},
 	['m-potato'] 	               	 = {['name'] = 'm-potato', 	                	['label'] = 'Potato', 	         	['weight'] = 100, 		['type'] = 'item', 		['image'] = 'm-potato.png', 	           	['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Good For Mashing'},
     ['m-mash'] 	             	  	 = {['name'] = 'm-mash', 	                	['label'] = 'Mash', 	         	['weight'] = 100, 		['type'] = 'item', 		['image'] = 'm-mash.png', 	        	   	['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'mashed potato'},
-
+    ['trowel'] 			     = {['name'] = 'trowel', 		     	   	['label'] = 'Trowel', 		    ['weight'] = 500, 		['type'] = 'item', 		['image'] = 'trowel.png', 	        	['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'a good jug of moonshine'},
+    
 ```
 
 Add Images From qb-moonshine/images to qb-inventory/html/images  

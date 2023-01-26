@@ -6,10 +6,10 @@ author 'oosayeroo'
 
 description 'qb-moonshine'
 
-version '1.3.4'
+version '2.0.0'
 
 client_scripts{
-    'client.lua'
+    'client/main.lua'
 }
 
 shared_scripts{
@@ -17,5 +17,5 @@ shared_scripts{
 }
 
 server_scripts{
-    'server.lua'
+    'server/main.lua'
 }
