@@ -4,16 +4,16 @@ local SellMoonshine = {
 }
 local MoneyType = Config.MoneyType
 
-RegisterServerEvent('qb-moonshine:server:GetPotato')
-AddEventHandler('qb-moonshine:server:GetPotato', function()
+RegisterServerEvent('sayer-moonshine:server:GetPotato')
+AddEventHandler('sayer-moonshine:server:GetPotato', function()
     local Player = QBCore.Functions.GetPlayer(source)
     local item = Config.Items["Potato"]
     Player.Functions.AddItem(item, Config.PotatoHarvestAmount)
     TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items[item], "add")
 end)
 
-RegisterServerEvent('qb-moonshine:server:GetBarley')
-AddEventHandler('qb-moonshine:server:GetBarley', function()
+RegisterServerEvent('sayer-moonshine:server:GetBarley')
+AddEventHandler('sayer-moonshine:server:GetBarley', function()
     local Player = QBCore.Functions.GetPlayer(source)
     local item = Config.Items["Barley"]
     Player.Functions.AddItem(item, Config.BarleyHarvestAmount)
@@ -22,10 +22,10 @@ end)
 
 QBCore.Functions.CreateUseableItem(Config.Items["Potato"], function(source, item)
     local Player = QBCore.Functions.GetPlayer(source)
-    TriggerClientEvent("qb-moonshine:client:GetMash", source, item.name)
+    TriggerClientEvent("sayer-moonshine:client:GetMash", source, item.name)
 end)
 
-RegisterNetEvent('qb-moonshine:server:GetMash', function()
+RegisterNetEvent('sayer-moonshine:server:GetMash', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local quantity = Config.MashAmount
@@ -37,7 +37,7 @@ RegisterNetEvent('qb-moonshine:server:GetMash', function()
     TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "add")
 end)
 
-RegisterNetEvent('qb-moonshine:server:HeatWater', function()
+RegisterNetEvent('sayer-moonshine:server:HeatWater', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local waterjar = Player.Functions.GetItemByName(Config.Items["Waterjar"])
@@ -50,7 +50,7 @@ RegisterNetEvent('qb-moonshine:server:HeatWater', function()
     end
 end)
 
-RegisterNetEvent('qb-moonshine:server:AddBarley', function()
+RegisterNetEvent('sayer-moonshine:server:AddBarley', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local heatedwater = Player.Functions.GetItemByName(Config.Items["HeatedWater"])
@@ -65,7 +65,7 @@ RegisterNetEvent('qb-moonshine:server:AddBarley', function()
     end
 end)
 
-RegisterNetEvent('qb-moonshine:server:AddYeast', function()
+RegisterNetEvent('sayer-moonshine:server:AddYeast', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local heatedbarley = Player.Functions.GetItemByName(Config.Items["HeatedBarley"])
@@ -80,7 +80,7 @@ RegisterNetEvent('qb-moonshine:server:AddYeast', function()
     end
 end)
 
-RegisterNetEvent('qb-moonshine:server:AddMash', function()
+RegisterNetEvent('sayer-moonshine:server:AddMash', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local heatedmixture = Player.Functions.GetItemByName(Config.Items["HeatedMixture"])
@@ -95,7 +95,7 @@ RegisterNetEvent('qb-moonshine:server:AddMash', function()
     end
 end)
 
-RegisterNetEvent('qb-moonshine:server:FinishMoonshine', function()
+RegisterNetEvent('sayer-moonshine:server:FinishMoonshine', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local moonshinemix = Player.Functions.GetItemByName(Config.Items["MoonshineMix"])
@@ -109,7 +109,7 @@ RegisterNetEvent('qb-moonshine:server:FinishMoonshine', function()
     end
 end)
 
-RegisterNetEvent('qb-moonshine:server:LoseStage2', function()
+RegisterNetEvent('sayer-moonshine:server:LoseStage2', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local item = Config.Items["HeatedWater"]
@@ -120,7 +120,7 @@ RegisterNetEvent('qb-moonshine:server:LoseStage2', function()
     TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item2], "remove")
 end)
 
-RegisterNetEvent('qb-moonshine:server:LoseStage3', function()
+RegisterNetEvent('sayer-moonshine:server:LoseStage3', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local item = Config.Items["HeatedBarley"]
@@ -131,7 +131,7 @@ RegisterNetEvent('qb-moonshine:server:LoseStage3', function()
     TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item2], "remove")
 end)
 
-RegisterNetEvent('qb-moonshine:server:LoseStage4', function()
+RegisterNetEvent('sayer-moonshine:server:LoseStage4', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local item = Config.Items["HeatedMixture"]
@@ -142,7 +142,7 @@ RegisterNetEvent('qb-moonshine:server:LoseStage4', function()
     TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item2], "remove")
 end)
 
-RegisterNetEvent('qb-moonshine:server:LoseStage5', function()
+RegisterNetEvent('sayer-moonshine:server:LoseStage5', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local item = Config.Items["MoonshineMix"]
@@ -152,7 +152,7 @@ end)
 
 
 --Selling ---
-RegisterNetEvent('qb-moonshine:server:SellMoonshine', function()
+RegisterNetEvent('sayer-moonshine:server:SellMoonshine', function()
     local src = source
     local price = 0
     local Player = QBCore.Functions.GetPlayer(src)
@@ -178,16 +178,16 @@ RegisterNetEvent('qb-moonshine:server:SellMoonshine', function()
 end)
 
 QBCore.Commands.Add("debugpicking", "fixed any picking issues", {}, false, function(source) 
-    TriggerClientEvent("qb-moonshine:debugpicking", source, false) 
+    TriggerClientEvent("sayer-moonshine:debugpicking", source, false) 
 end)
 
-RegisterNetEvent('qb-moonshine:StartServerFire', function(coords, maxChildren, isGasFire)
+RegisterNetEvent('sayer-moonshine:StartServerFire', function(coords, maxChildren, isGasFire)
     local src = source
     local ped = GetPlayerPed(src)
     local coords2 = GetEntityCoords(ped)
-    TriggerClientEvent("qb-moonshine:StartFire", -1, coords, maxChildren, isGasFire)
+    TriggerClientEvent("sayer-moonshine:StartFire", -1, coords, maxChildren, isGasFire)
 end)
 
-RegisterNetEvent('qb-moonshine:StopFires', function()
-    TriggerClientEvent("qb-moonshine:StopFires", -1)
+RegisterNetEvent('sayer-moonshine:StopFires', function()
+    TriggerClientEvent("sayer-moonshine:StopFires", -1)
 end)
