@@ -1,4 +1,4 @@
-# qb-moonshine
+# sayer-moonshine
 a simple moonshine making script with configurable locations, prices, amounts etc. 
 
 # Dependencies:
@@ -10,7 +10,7 @@ a simple moonshine making script with configurable locations, prices, amounts et
 
 Add to qb-core/shared/items.lua:
 ```
-	--qb-moonshine
+	--sayer-moonshine
 	['m-moonshine'] 			     = {['name'] = 'm-moonshine', 		     	   	['label'] = 'Moonshine', 		    ['weight'] = 500, 		['type'] = 'item', 		['image'] = 'm-moonshine.png', 	        	['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'a good jug of moonshine'},
     ['m-waterjar'] 		         	 = {['name'] = 'm-waterjar', 			       	['label'] = 'Water Jar', 	    	['weight'] = 400, 		['type'] = 'item', 		['image'] = 'm-waterjar.png', 	        	['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'a large water jar'},
     ['m-heatedwater'] 		       	 = {['name'] = 'm-heatedwater', 	        	['label'] = 'Stage 1 Mix', 	     	['weight'] = 300, 		['type'] = 'item', 		['image'] = 'm-heatedwater.png', 	       	['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Very Hot Water'},
@@ -25,7 +25,7 @@ Add to qb-core/shared/items.lua:
     
 ```
 
-Add Images From qb-moonshine/images to qb-inventory/html/images  
+Add Images From sayer-moonshine/images to qb-inventory/html/images  
 
 ## Add To Small Resources/Server/Consumable
 ```

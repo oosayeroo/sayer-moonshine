@@ -4,7 +4,7 @@ game 'gta5'
 
 author 'oosayeroo'
 
-description 'qb-moonshine'
+description 'sayer-moonshine'
 
 version '2.0.0'
 
