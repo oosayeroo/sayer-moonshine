@@ -306,7 +306,6 @@ CreateThread(function()
                         sleep = 0
                         QBCore.Functions.DrawText3D(v.x, v.y, v.z, "~g~[E]~w~ - Pick Potato")
                         if IsControlJustReleased(0, 38) then
-                            PrepareAnim()
                             pickCrop("potato")
                         end
                     elseif #(pos - vector3(v.x, v.y, v.z)) < 1.5 then
@@ -319,7 +318,6 @@ CreateThread(function()
                         sleep = 0
                         QBCore.Functions.DrawText3D(v.x, v.y, v.z, "~g~[E]~w~ - Pick Barley")
                         if IsControlJustReleased(0, 38) then
-                            PrepareAnim()
                             pickCrop("barley")
                         end
                     elseif #(pos - vector3(v.x, v.y, v.z)) < 1.5 then
@@ -426,6 +424,7 @@ function pickCrop(cropType)
         elseif cropType == "barley" then
             eventName = "sayer-moonshine:server:GetBarley"
         end
+        PrepareAnim()
         QBCore.Functions.Progressbar("grind_coke", "Picking ".. cropType .." ..", Config.PickingTime * 1000, false, true, {
             disableMovement = true,
             disableCarMovement = true,
